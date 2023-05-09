@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_list_foreach.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/09 17:20:52 by marirodr         ###   ########.fr       */
+/*   Created: 2023/02/23 14:14:53 by marirodr          #+#    #+#             */
+/*   Updated: 2023/03/30 20:18:42 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_image
+void	ft_list_foreach(t_list *begin_list, void (*f)(void *))
 {
-  mlx_t				*mlx;
-	mlx_texture_t	tex_player;
-	mlx_image_t		img_player;
-}	t_image;
+	t_list	*list_ptr;
 
-#endif
+	list_ptr = begin_list;
+	while (list_ptr)
+	{
+		(*f)(list_ptr->data);
+		list_ptr = list_ptr->next;
+	}
+}

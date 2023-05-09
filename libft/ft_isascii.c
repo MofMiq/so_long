@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/09 17:20:52 by marirodr         ###   ########.fr       */
+/*   Created: 2022/09/20 13:47:50 by marirodr          #+#    #+#             */
+/*   Updated: 2022/09/22 13:47:03 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_image
+int	ft_isascii(int i)
 {
-  mlx_t				*mlx;
-	mlx_texture_t	tex_player;
-	mlx_image_t		img_player;
-}	t_image;
-
-#endif
+	if (!(i >= 0 && i <= 127))
+		return (0);
+	return (1);
+}

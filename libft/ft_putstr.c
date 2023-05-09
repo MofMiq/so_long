@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/09 17:20:52 by marirodr         ###   ########.fr       */
+/*   Created: 2022/11/30 18:31:00 by marirodr          #+#    #+#             */
+/*   Updated: 2023/03/30 11:03:24 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_image
+void	ft_putstr(char *str)
 {
-  mlx_t				*mlx;
-	mlx_texture_t	tex_player;
-	mlx_image_t		img_player;
-}	t_image;
+	int	i;
 
-#endif
+	i = 0;
+	while (str[i] != '\0')
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+}

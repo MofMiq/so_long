@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/09 17:20:52 by marirodr         ###   ########.fr       */
+/*   Created: 2022/10/04 13:00:37 by marirodr          #+#    #+#             */
+/*   Updated: 2022/10/05 14:36:28 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_image
+/*returns the last element of the list.*/
+
+t_list	*ft_lstlast(t_list *lst)
 {
-  mlx_t				*mlx;
-	mlx_texture_t	tex_player;
-	mlx_image_t		img_player;
-}	t_image;
-
-#endif
+	if (!lst)
+		return (0);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}

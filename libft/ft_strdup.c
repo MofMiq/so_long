@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/09 17:20:52 by marirodr         ###   ########.fr       */
+/*   Created: 2022/09/27 17:52:55 by marirodr          #+#    #+#             */
+/*   Updated: 2022/10/06 12:22:15 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_image
+/*allocates sufficient memory for a copy of the string s1, does the copy, and
+returns a pointer to it. The pointer may subsequently be used as an argument
+to the function free(3).*/
+
+char	*ft_strdup(const char *s1)
 {
-  mlx_t				*mlx;
-	mlx_texture_t	tex_player;
-	mlx_image_t		img_player;
-}	t_image;
+	char	*s2;
 
-#endif
+	s2 = (char *)malloc(ft_strlen(s1) + 1);
+	if (!s2)
+		return (0);
+	ft_memcpy(s2, s1, ft_strlen(s1) + 1);
+	return (s2);
+}

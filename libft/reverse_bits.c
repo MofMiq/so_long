@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   reverse_bits.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/09 17:20:52 by marirodr         ###   ########.fr       */
+/*   Created: 2023/02/14 11:55:21 by marirodr          #+#    #+#             */
+/*   Updated: 2023/03/30 11:09:29 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_image
+unsigned char	reverse_bits(unsigned char octet)
 {
-  mlx_t				*mlx;
-	mlx_texture_t	tex_player;
-	mlx_image_t		img_player;
-}	t_image;
+	int				i;
+	unsigned char	res;
 
-#endif
+	i = 8;
+	res = 0;
+	while (i--)
+	{
+		res = (res * 2) + (octet % 2);
+		octet /= 2;
+	}
+	return (res);
+}
+
+/*int main()
+{
+	unsigned char octet = 38;
+
+	printf("original value:%d\n", octet);
+	printf("original value:%d\n", reverse_bits(octet));
+}*/

@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_put_lower_hex.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/09 17:20:52 by marirodr         ###   ########.fr       */
+/*   Created: 2023/02/19 20:39:54 by hunter            #+#    #+#             */
+/*   Updated: 2023/03/30 20:25:12 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_image
+void	ft_put_lower_hex(int nbr)
 {
-  mlx_t				*mlx;
-	mlx_texture_t	tex_player;
-	mlx_image_t		img_player;
-}	t_image;
+	if (nbr > 15)
+	{
+		ft_put_lower_hex(nbr / 16);
+		ft_put_lower_hex(nbr % 16);
+	}
+	else
+	{
+		if (nbr < 10)
+			ft_putchar(nbr + '0');
+		else
+			ft_putchar(nbr + 87);
+	}
+}
 
-#endif
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+		ft_put_lower_hex(ft_atoi(argv[1]));
+	write(1, "\n", 1);
+}

@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/09 17:20:52 by marirodr         ###   ########.fr       */
+/*   Created: 2022/10/03 13:57:06 by marirodr          #+#    #+#             */
+/*   Updated: 2023/03/30 12:06:08 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_image
+/*create new list. Allocates (malloc) and returns a new element. The variable
+'content' is initialized with the value of the paremeter 'content'. The variable
+'next' is initialized to NULL.*/
+
+t_list	*ft_lstnew(void *data)
 {
-  mlx_t				*mlx;
-	mlx_texture_t	tex_player;
-	mlx_image_t		img_player;
-}	t_image;
+	t_list	*list;
 
-#endif
+	list = (t_list *)malloc(sizeof(t_list));
+	if (!list)
+		return (0);
+	list->data = data;
+	list->next = NULL;
+	return (list);
+}
