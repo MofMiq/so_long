@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 10:33:34 by marirodr          #+#    #+#             */
-/*   Updated: 2023/03/30 20:14:35 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:40:18 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void				ft_putnbr_fd(int n, int fd);
 
 //conversors
 int					ft_atoi(const char *str);
-long int			ft_atol(const char *str);
+long int			ft_atol(char *str);
 char				*ft_itoa(int n);
 void				ft_put_lower_hex(int nbr);
 void				ft_putnbr(int nb);

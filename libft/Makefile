@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/22 13:21:44 by marirodr          #+#    #+#              #
-#    Updated: 2023/05/09 17:24:17 by marirodr         ###   ########.fr        #
+#    Updated: 2023/04/27 13:17:40 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC			= 	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isdigit.c \
 				ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c \
 				ft_lstmap_bonus.c ft_list_foreach.c ft_list_remove_if.c \
 				ft_printf.c ft_printf_tools.c ft_printf_tools2.c \
-				get_next_line.c get_next_line_utils.c \
+				get_next_line_bonus.c get_next_line_utils_bonus.c \
 
 
 OBJT		= 	$(SRC:.c=.o)
@@ -38,12 +38,15 @@ all:			$(NAME)
 $(NAME):
 				@gcc -c $(CFLAGS) $(SRC)
 				@ar rcs $(NAME) $(OBJT)
+#				@echo "Ready"
 
 clean:
 				@rm -f $(OBJT) $(BONUS_OBJT)
+#				@echo "Compiled objects have been removed"
 
 fclean:			clean
 				@rm -f $(NAME)
+#				@echo "Executables have been removed"
 
 re:				fclean all
 
