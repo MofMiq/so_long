@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:18:23 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/11 18:37:40 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:44:51 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,5 @@ int	main(int argc, char **argv)
 	game = (t_game *)malloc(sizeof(t_game)); //reservo la memoria para la estructura
 	ft_init_strcut(argv[1], game); //inicializo la estructura
 	ft_map_check(game);
+	//ft_free(game);
 }

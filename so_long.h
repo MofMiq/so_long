@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/11 18:56:54 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:01:18 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,15 @@ int		ft_check_arg(char *argv);
 t_game	*ft_init_strcut(char *argv, t_game *game);
 
 //free_n_error.c
-void	ft_error(int error, t_game *game);
+void	ft_error(int error);
 void	ft_free(t_game *game);
 
 //map_check.c
 void	ft_map_check(t_game *game);
 void	ft_read_map(t_game *game, int fd);
-char	*ft_strjoin_map(char *old_line, char *new_line);
+void	ft_check_map(t_game *game);
+void	ft_check_elements(t_game *game);
+//only for debugging
+void	ft_print_map(t_game *game);
 
 #endif

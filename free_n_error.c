@@ -6,13 +6,13 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:00:21 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/11 17:32:34 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:57:42 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_error(int error, t_game *game)
+void	ft_error(int error)
 {
 	if (error == NOFILE_ERROR)
 		ft_printf("Error, the file doesn't exist\n");
@@ -23,12 +23,11 @@ void	ft_error(int error, t_game *game)
 	else if (error == BAD_ROW)
 		ft_printf("Error, the number of columns aren't the same for each row\n");
 	else if (error == NO_WALLS)
-		ft_printf("Error, the map isn't fully surrounded of wall\n");
+		ft_printf("Error, the map isn't fully surrounded of walls\n");
 	else if (error == INVALID_ELEMENT)
 		ft_printf("Error, there is an undefied element in the map\n");
 	else if (error == ELEMENT_ERROR)
 		ft_printf("Error, the number of correct elements aren't invalid\n");
-	ft_free(game);
 	exit(1);
 }
 

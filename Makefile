@@ -6,13 +6,13 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/04 16:03:19 by marirodr          #+#    #+#              #
-#    Updated: 2023/05/11 18:35:20 by marirodr         ###   ########.fr        #
+#    Updated: 2023/05/12 18:19:12 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= so_long
 
-CC			= gcc
+CC			= gcc -g
 
 CFLAGS	= -Wall -Wextra -Werror
 
