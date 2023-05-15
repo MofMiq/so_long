@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:18:23 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/12 17:44:51 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:49:44 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ t_game	*ft_init_strcut(char *argv, t_game *game)
 	game->e_count = 0;
 	game->c_count = 0;
 	game->moves = 0;
-	game->sprite_w = SPRITE_SIZE;
-	game->sprite_h = SPRITE_SIZE;
+	game->sprite_w = S_SZ;
+	game->sprite_h = S_SZ;
 	game->mlx = NULL;
-	game->player_img = NULL;
+	game->plyer_img = NULL;
 	game->floor_img = NULL;
 	game->wall_img = NULL;
-	game->collec_img = NULL;
+	game->coll_img = NULL;
 	game->exit_img = NULL;
 	game->map_name = ft_strdup(argv);
 	return (game);

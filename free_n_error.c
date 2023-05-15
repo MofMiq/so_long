@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:00:21 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/12 17:57:42 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:00:30 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	ft_error(int error)
 		ft_printf("Error, there is an undefied element in the map\n");
 	else if (error == ELEMENT_ERROR)
 		ft_printf("Error, the number of correct elements aren't invalid\n");
+	else if (error == IMPOSIBLE_WIN)
+		ft_printf("You can't win :(\n");
 	exit(1);
 }
 
@@ -49,4 +51,25 @@ void	ft_free(t_game *game)
 	}
 	free(game->map_name); //liberar el string en el que se ha guardado el nombre del mapa
 	free(game); //liberar la estructura
+}
+
+//for debug only
+void	ft_print_map(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("map:\n");
+	while (game->map[i])
+	{
+		ft_printf("%s\n", game->map[i]);
+		i++;
+	}
+	i = 0;
+	ft_printf("map_copy:\n");
+	while (game->map_copy[i])
+	{
+		ft_printf("%s\n", game->map_copy[i]);
+		i++;
+	}
 }

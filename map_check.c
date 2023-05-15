@@ -6,32 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:31:21 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/12 18:42:45 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:21:31 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-//for debug only
-void	ft_print_map(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	ft_printf("map:\n");
-	while (game->map[i])
-	{
-		ft_printf("%s\n", game->map[i]);
-		i++;
-	}
-	i = 0;
-	ft_printf("map_copy:\n");
-	while (game->map_copy[i])
-	{
-		ft_printf("%s\n", game->map_copy[i]);
-		i++;
-	}
-}
 
 void	ft_map_check(t_game *game)
 {
@@ -47,6 +26,11 @@ void	ft_map_check(t_game *game)
 	close(fd);
 	ft_check_map(game);
 	ft_check_elements(game);
+	ft_flood_fill(game, game->player_y, game->player_x);
+	ft_valid_path(game);
+	ft_game_start(game);
+	//ft_free_map(game);
+	//exit(0);
 }
 
 /*leemos el mapa con get_next_line y vamos cogiendo linea a linea todas
@@ -79,6 +63,10 @@ void	ft_read_map(t_game *game, int fd)
 	free(tmp_map_line);
 }
 
+/*comprobamos dos posibles errores derivados de los mapas: que todas
+las filas tengan el mismo numero de columnas y que haya algun hueco 
+en los muros (ausencia de '1' en los filos).*/
+
 void	ft_check_map(t_game *game)
 {
 	int	y;
@@ -103,6 +91,11 @@ void	ft_check_map(t_game *game)
 		y++;
 	}
 }
+
+/*comprobamos que existan los suficientes elementos (caracteres) de cada tipo:
+al menos un coleccionable ('C') y obligatoriamente un solo jugador ('P') y una
+sola salida ('E'). Adicionalmente, guardamos en la estructura la posicion del
+jugador para posteriormente usarla.*/
 
 void	ft_check_elements(t_game *game)
 {
@@ -131,4 +124,54 @@ void	ft_check_elements(t_game *game)
 	}
 	if (game->p_count != 1 || game->e_count != 1 || game->c_count < 1)
 		ft_error(ELEMENT_ERROR);
+}
+
+/*flood_fill debe rellenar con ‘F’ todos los ‘0’ desde la posición del jugador
+(‘P’), es decir debe convertir 0 y P en F para comprobar que hay un camino
+valido hacía la salida (‘E’).
+Además, convertimos C y E en 0, porque forman parte del camino
+Estas comprobaciones tienen que hacerse con game→map_copy porque al pintar
+sobre el mapa lo estamos modificando; así game→map estaría intacto aún 
+chequeando el path en caso de que haya un camino hacía la salida.*/
+
+void	ft_flood_fill(t_game *game, int p_y, int p_x)
+{
+	if (p_y < 0 || p_x < 0 || p_y > game->num_row
+		|| p_x > game->num_col || game->map_copy[p_y][p_x] == '1'
+			|| game->map_copy[p_y][p_x] == 'F')
+		return ;
+	if (game->map_copy[p_y][p_x] == 'E'
+			|| game->map_copy[p_y][p_x] == 'C')
+		game->map_copy[p_y][p_x] = '0';
+	game->map_copy[p_y][p_x] = 'F';
+	ft_flood_fill(game, p_y + 1, p_x);
+	ft_flood_fill(game, p_y - 1, p_x);
+	ft_flood_fill(game, p_y, p_x + 1);
+	ft_flood_fill(game, p_y, p_x - 1);
+}
+
+/*sí hay un camino valido C & E se convierten en 0; o lo que es lo mismo sí
+C & E no han pasado a ser 0 significa que en mayor o menor medida están
+rodeados de muros (1), po tanto sí al recorrer el mapa de nuevo sigue 
+habiendo alguna C o la E intacta quiere decir que no es accesible para el
+player (P). lo que no tiene sentido para mi ahora es empezar a recorrer
+el mapa desde la posición del jugador.simplemente debo leerlo por completo.*/
+
+void	ft_valid_path(t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (game->map_copy[++y])
+	{
+		x = 0;
+		while (game->map_copy[y][++x])
+		{
+			if (game->map_copy[y][x] == 'E' || game->map_copy[y][x] == 'C')
+				ft_error(IMPOSIBLE_WIN);
+			x++;
+		}
+		y++;
+	}
 }

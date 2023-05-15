@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/04 16:03:19 by marirodr          #+#    #+#              #
-#    Updated: 2023/05/12 18:19:12 by marirodr         ###   ########.fr        #
+#    Updated: 2023/05/15 18:21:03 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT		= libft/libft.a
 
 MLX42		= MLX42/libmlx42.a
 
-SRC			= so_long.c free_n_error.c map_check.c \
+SRC			= so_long.c free_n_error.c map_check.c game.c \
 
 OBJ			= $(SRC:.c=.o)
 
