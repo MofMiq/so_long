@@ -6,11 +6,20 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:05:48 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/15 18:28:28 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:30:56 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_game_start(t_game *game)
+{
+	ft_create_window(game);
+	ft_generate_map(game);
+	mlx_loop_hook(game->mlx, ft_controls, game);
+	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
+}
 
 /*genreamos una ventana con el tamaño que ya sabemos que tiene el mapa (num_col
 & num_row) * 32, ya que es el tamaño de los sprites (mlx_init). luego generamos
@@ -18,13 +27,15 @@ las texturas a raiz de los png guardados en /img y luego las convertimos en
 imagenes
 
 ¡¡¡¡¡cuidado borrar las texturas (mlx_delete_texture(texture))y las imagenes (mlx_delete_image(mlx, img))!!!!!
-mlx_delete_texture(texture->player)*/
+mlx_delete_texture(texture->player)
+//  Optional, terminate will clean up any leftover images (not textures!)
+	mlx_terminate(mlx);
+*/
 
 void	ft_create_window(t_game *game)
 {
 	t_texture	*texture;
 
-	//ft_printf("num_col: %d\nnum_row: %d\n", game->num_col, game->num_row);
 	texture = malloc(sizeof(t_texture)); //liberar memoria
 	game->mlx = mlx_init(game->num_col * 32, game->num_row * 32, "so_long", 0);
 	texture->player = mlx_load_png("img/cat_2.png");
@@ -37,8 +48,16 @@ void	ft_create_window(t_game *game)
 	game->wall_img = mlx_texture_to_image(game->mlx, texture->wall);
 	game->exit_img = mlx_texture_to_image(game->mlx, texture->exit);
 	game->coll_img = mlx_texture_to_image(game->mlx, texture->collec);
-	//pause();
+	mlx_delete_texture(texture->player);
+	mlx_delete_texture(texture->floor);
+	mlx_delete_texture(texture->wall);
+	mlx_delete_texture(texture->exit);
+	mlx_delete_texture(texture->collec);
 }
+
+/*recorremos el mapa entero y le asignamos las imagenes a cada objeto del
+juego, ademas de usar la funcion mlx_image_to_window para que se muestre
+en la ventana*/
 
 void	ft_generate_map(t_game *game)
 {
@@ -66,13 +85,4 @@ void	ft_generate_map(t_game *game)
 		x = 0;
 		y++;
 	}
-}
-
-void	ft_game_start(t_game *game)
-{
-	ft_create_window(game);
-	ft_generate_map(game);
-	//mlx_key_hook(game->mlx, &ft_controls, game);
-	//mlx_loop(game->mlx);
-	//mlx_terminate(game->mlx);
 }

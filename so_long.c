@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:18:23 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/15 17:49:44 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:01:57 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ t_game	*ft_init_strcut(char *argv, t_game *game)
 	game->num_row = 0;
 	game->map_y = 0;
 	game->map_x = 0;
-	game->new_py = 0;
-	game->new_px = 0;
+	game->curr_py = 0;
+	game->curr_px = 0;
 	game->p_count = 0;
 	game->e_count = 0;
 	game->c_count = 0;

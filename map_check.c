@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:31:21 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/15 17:21:31 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:31:26 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ft_map_check(t_game *game)
 	ft_flood_fill(game, game->player_y, game->player_x);
 	ft_valid_path(game);
 	ft_game_start(game);
-	//ft_free_map(game);
-	//exit(0);
+	ft_free(game);
+	exit(0);
 }
 
 /*leemos el mapa con get_next_line y vamos cogiendo linea a linea todas

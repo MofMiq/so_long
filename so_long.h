@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/15 17:54:08 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:01:49 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_game
 	int							num_row;
 	int							player_y;
 	int							player_x;
-	int							new_py;
-	int							new_px;
+	int							curr_py;
+	int							curr_px;
 	int							moves;
 	int							p_count;
 	int							e_count;
@@ -84,5 +84,13 @@ void	ft_valid_path(t_game *game);
 void	ft_game_start(t_game *game);
 void	ft_create_window(t_game *game);
 void	ft_generate_map(t_game *game);
+
+//ply_moves.c
+//void	ft_controls(mlx_key_data_t keydata, void *param);
+void	ft_controls(void *param);
+void	ft_up(t_game *game);
+void	ft_down(t_game *game);
+void	ft_left(t_game *game);
+void	ft_right(t_game *game);
 
 #endif
