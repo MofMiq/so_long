@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/16 18:01:49 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:03:44 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_game
 	int							c_count;
 	int							sprite_w;
 	int							sprite_h;
+	int							is_pressed;
  	mlx_t	*mlx;
 	mlx_image_t			*plyer_img;
 	mlx_image_t			*floor_img;
@@ -84,6 +85,7 @@ void	ft_valid_path(t_game *game);
 void	ft_game_start(t_game *game);
 void	ft_create_window(t_game *game);
 void	ft_generate_map(t_game *game);
+void	ft_render_player(t_game *game);
 
 //ply_moves.c
 //void	ft_controls(mlx_key_data_t keydata, void *param);

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:18:23 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/16 18:01:57 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:45:59 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_game	*ft_init_strcut(char *argv, t_game *game)
 	game->moves = 0;
 	game->sprite_w = S_SZ;
 	game->sprite_h = S_SZ;
+	game->is_pressed = 0;
 	game->mlx = NULL;
 	game->plyer_img = NULL;
 	game->floor_img = NULL;

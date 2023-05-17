@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:05:48 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/16 17:30:56 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:04:40 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	ft_game_start(t_game *game)
 {
 	ft_create_window(game);
 	ft_generate_map(game);
-	mlx_loop_hook(game->mlx, ft_controls, game);
+	ft_render_player(game);
+	mlx_loop_hook(game->mlx, &ft_controls, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 }
@@ -38,6 +39,8 @@ void	ft_create_window(t_game *game)
 
 	texture = malloc(sizeof(t_texture)); //liberar memoria
 	game->mlx = mlx_init(game->num_col * 32, game->num_row * 32, "so_long", 0);
+	if (!game->mlx)
+		ft_printf("Error\nmlx_init failed\n");
 	texture->player = mlx_load_png("img/cat_2.png");
 	texture->floor = mlx_load_png("img/floor.png");
 	texture->wall = mlx_load_png("img/wall.png");
@@ -70,15 +73,32 @@ void	ft_generate_map(t_game *game)
 	{
 		while (game->map[y][x])
 		{
+			mlx_image_to_window(game->mlx, game->floor_img, x * 32, y * 32);
 			if (game->map[y][x] == '1')
 				mlx_image_to_window(game->mlx, game->wall_img, x * 32, y * 32);
-			else if (game->map[y][x] == '0')
-				mlx_image_to_window(game->mlx, game->floor_img, x * 32, y * 32);
 			else if (game->map[y][x] == 'C')
 				mlx_image_to_window(game->mlx, game->coll_img, x * 32, y * 32);
 			else if (game->map[y][x] == 'E')
 				mlx_image_to_window(game->mlx, game->exit_img, x * 32, y * 32);
-			else if (game->map[y][x] == 'P')
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
+
+void	ft_render_player(t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	x = 0;
+	while (game->map[y])
+	{
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'P')
 				mlx_image_to_window(game->mlx, game->plyer_img, x * 32, y * 32);
 			x++;
 		}
