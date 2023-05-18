@@ -12,6 +12,9 @@
 
 #include "so_long.h"
 
+/*This function displays the different errors' messages that can be produced
+during the program's execution.*/
+
 void	ft_error(int error)
 {
 	if (error == NOFILE_ERROR)
@@ -33,24 +36,30 @@ void	ft_error(int error)
 	exit(1);
 }
 
+/*This function frees the main structure of the program just before the program's end:
+1 - Free the strings that represent the rows of the map.
+2 - Free the matrix itself, also in case it has been created but not filled.
+3 - Free the string where the name of the map has been stored. 
+4 - Free the structure.*/
+
 void	ft_free(t_game *game)
 {
 	int	i;
 
 	i = 0;
-	while (i < game->num_row) //liberas los strings que vienen a ser las row del mapa
+	while (i < game->num_row)
 	{
 		free(game->map[i]);
 		free(game->map_copy[i]);
 		i++;
 	}
-	if (game->map) //liberas la matriz en si, tambien por si se ha creado la matriz pero no se ha rellanado
+	if (game->map)
 	{
 		free(game->map);
 		free(game->map_copy);
 	}
-	free(game->map_name); //liberar el string en el que se ha guardado el nombre del mapa
-	free(game); //liberar la estructura
+	free(game->map_name);
+	free(game);
 }
 
 //for debug only
