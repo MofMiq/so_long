@@ -33,11 +33,13 @@ void	ft_map_check(t_game *game)
 	exit(0);
 }
 
-/*leemos el mapa con get_next_line y vamos cogiendo linea a linea todas
-las filas del mapa. las vamos concatenando en otra variable tmp, de modo
-que quede una linea enorme con todo el mapa, para despues aplicarle el
-ft_split y generar una matriz limpia en la estructua (dos, si contamos
-la copia del mapa que usaremos cuando el flood fill)*/
+/*We read the map using get_next_line and we go line by line, retrieving all the
+rows of the map. We concatenate them into another variable called tmp, so that we
+have one huge line with the entire map. Then, we apply ft_split to it, generating a
+clean matrix within the structure (in reality, we create two matrices because we
+will later need a copy of the map when using ft_flood_fill).
+Additionally, we will perform two checks: first, if the file is empty, and then if
+the file starts with a '\n'*/
 
 void	ft_read_map(t_game *game, int fd)
 {
@@ -46,7 +48,7 @@ void	ft_read_map(t_game *game, int fd)
 
 	line = get_next_line(fd);
 	tmp_map_line = NULL;
-	if (!line) //check if the map's file is empty
+	if (!line)
 		ft_error(EMPTY_MAP);
 	while (line)
 	{
@@ -55,7 +57,7 @@ void	ft_read_map(t_game *game, int fd)
 		line = get_next_line(fd);
 		game->num_row++;
 	}
-	if (tmp_map_line[0] == '\n') //formato del mapa invalido porque empiza con salto de linea
+	if (tmp_map_line[0] == '\n')
 		ft_error(INVALID_MAP);
 	game->map = ft_split(tmp_map_line, '\n');
 	game->map_copy = ft_split(tmp_map_line, '\n');
@@ -63,9 +65,9 @@ void	ft_read_map(t_game *game, int fd)
 	free(tmp_map_line);
 }
 
-/*comprobamos dos posibles errores derivados de los mapas: que todas
-las filas tengan el mismo numero de columnas y que haya algun hueco 
-en los muros (ausencia de '1' en los filos).*/
+/*We check for two potential errors related to the maps: ensuring that all rows have
+the same number of columns and checking for any gaps in the walls (absence of '1' in
+the rows).*/
 
 void	ft_check_map(t_game *game)
 {
@@ -73,15 +75,15 @@ void	ft_check_map(t_game *game)
 	int	x;
 
 	y = 0;
-	game->num_col = (int)ft_strlen(game->map[0]); //ok, we check and save in the struct the number of columns
+	game->num_col = (int)ft_strlen(game->map[0]);
 	while (game->map[y])
 	{
-		if (game->num_col != (int)ft_strlen(game->map[y])) //check if the number of columns is the same in all rows
+		if (game->num_col != (int)ft_strlen(game->map[y]))
 			ft_error(BAD_ROW);
 		x = 0;
 		while(game->map[y][x])
 		{
-			if (y == 0 || x == 0 || y == game->num_row - 1 || x == game->num_col - 1) //check if the map is surrounded by walls
+			if (y == 0 || x == 0 || y == game->num_row - 1 || x == game->num_col - 1)
 			{
 				if (game->map[y][x] != '1')
 					ft_error(NO_WALLS);
@@ -92,10 +94,10 @@ void	ft_check_map(t_game *game)
 	}
 }
 
-/*comprobamos que existan los suficientes elementos (caracteres) de cada tipo:
-al menos un coleccionable ('C') y obligatoriamente un solo jugador ('P') y una
-sola salida ('E'). Adicionalmente, guardamos en la estructura la posicion del
-jugador para posteriormente usarla.*/
+/*We verify that there are enough elements (characters) of each type: at least one
+collectible ('C'), exactly one player ('P'), and exactly one exit ('E'). Additionally,
+we save the position of the player in the structure for later use. We also check whether
+there is an undefined element in the map, such as an 'X'.*/
 
 void	ft_check_elements(t_game *game)
 {
@@ -126,13 +128,14 @@ void	ft_check_elements(t_game *game)
 		ft_error(ELEMENT_ERROR);
 }
 
-/*flood_fill debe rellenar con ‘F’ todos los ‘0’ desde la posición del jugador
-(‘P’), es decir debe convertir 0 y P en F para comprobar que hay un camino
-valido hacía la salida (‘E’).
-Además, convertimos C y E en 0, porque forman parte del camino
-Estas comprobaciones tienen que hacerse con game→map_copy porque al pintar
-sobre el mapa lo estamos modificando; así game→map estaría intacto aún 
-chequeando el path en caso de que haya un camino hacía la salida.*/
+/*ft_flood_fill should fill all '0' with 'F' starting from the player's position ('P'). In
+other words, it should convert '0' and 'P' to 'F' to check if there is a valid path to the
+exit ('E').
+We also convert 'C' and 'E' to 0 because they are part of the valid path for the player.
+Surprisingly, these conversions will serve us in the future for another map check.
+These checks must be done with game->map_copy because by painting on the map, we are modifying
+it. Therefore, game->map would remain intact while still verifying if the player has a clear
+path to reach the exit*/
 
 void	ft_flood_fill(t_game *game, int p_y, int p_x)
 {
@@ -150,12 +153,10 @@ void	ft_flood_fill(t_game *game, int p_y, int p_x)
 	ft_flood_fill(game, p_y, p_x - 1);
 }
 
-/*sí hay un camino valido C & E se convierten en 0; o lo que es lo mismo sí
-C & E no han pasado a ser 0 significa que en mayor o menor medida están
-rodeados de muros (1), po tanto sí al recorrer el mapa de nuevo sigue 
-habiendo alguna C o la E intacta quiere decir que no es accesible para el
-player (P). lo que no tiene sentido para mi ahora es empezar a recorrer
-el mapa desde la posición del jugador.simplemente debo leerlo por completo.*/
+/*If there is a valid path, 'C' and 'E' are converted to '0'. In other words, if 'C' and 'E' have
+not become '0', it means they are surrounded by walls ('1'). Therefore, if after traversing the map
+again, there are still any 'C' or the 'E' intact, it means that it is not accessible for the player
+('P'), making it impossible to win.*/
 
 void	ft_valid_path(t_game *game)
 {
