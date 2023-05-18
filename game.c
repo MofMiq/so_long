@@ -12,6 +12,8 @@
 
 #include "so_long.h"
 
+//This function start the game and it is called after the map has been validated
+
 void	ft_game_start(t_game *game)
 {
 	ft_create_window(game);
@@ -22,16 +24,14 @@ void	ft_game_start(t_game *game)
 	mlx_terminate(game->mlx);
 }
 
-/*genreamos una ventana con el tamaño que ya sabemos que tiene el mapa (num_col
-& num_row) * 32, ya que es el tamaño de los sprites (mlx_init). luego generamos
-las texturas a raiz de los png guardados en /img y luego las convertimos en
-imagenes
-
-¡¡¡¡¡cuidado borrar las texturas (mlx_delete_texture(texture))y las imagenes (mlx_delete_image(mlx, img))!!!!!
-mlx_delete_texture(texture->player)
-//  Optional, terminate will clean up any leftover images (not textures!)
-	mlx_terminate(mlx);
-*/
+/*We generate a window with the size we already know the map has (num_col & num_row)
+* 32, as it is the size of the sprites in mlx_init. Then, we generate the textures
+based on the PNG files stored in /img and convert them into images that can be
+displayed on the window.
+We need to manually delete the textures to avoid residual garbage, so we do it in
+this function directly once they have been converted into images. On the other hand,
+we don't need to manually delete the images because mlx_terminate takes care of it
+for us. */
 
 void	ft_create_window(t_game *game)
 {
@@ -58,9 +58,10 @@ void	ft_create_window(t_game *game)
 	mlx_delete_texture(texture->collec);
 }
 
-/*recorremos el mapa entero y le asignamos las imagenes a cada objeto del
-juego, ademas de usar la funcion mlx_image_to_window para que se muestre
-en la ventana*/
+/*We traverse the entire map and assign the images to each object in the game, In 
+addition to using the function mlx_image_to_window to display it in the window.
+We also first place the floor image in all cells to ensure that the remaining sprites
+on't appear "hanging in the air" or without a base.*/
 
 void	ft_generate_map(t_game *game)
 {
@@ -86,6 +87,10 @@ void	ft_generate_map(t_game *game)
 		y++;
 	}
 }
+
+/*We assign the image to the player (P) separately to ensure that it remains on top of 
+the layers assigned by mlx, preventing it from "disappearing" beneath the layers of 
+other sprites.*/
 
 void	ft_render_player(t_game *game)
 {
