@@ -19,7 +19,7 @@ void	ft_map_check(t_game *game)
 	fd = open(game->map_name, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("Error, the file doesn't exist\n");
+		ft_printf("Error, the file doesn't exist\n"); //llamar a ft_error y poner NOFILE_ERROR
 		exit(1);
 	}
 	ft_read_map(game, fd);
