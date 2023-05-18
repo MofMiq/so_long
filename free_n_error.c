@@ -6,18 +6,23 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:00:21 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/15 17:00:30 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/18 18:50:47 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	ft_error(int error)
+
 /*This function displays the different errors' messages that can be produced
 during the program's execution.*/
 
-void	ft_error(int error)
 {
-	if (error == NOFILE_ERROR)
+	if (error == BAD_ARG)
+		ft_printf("Error, bad numbers of arguments\n");
+	else if (error == EXTENSION_ERROR)
+		ft_printf("Error, the file's extension isn't .ber\n");
+	else if (error == NOFILE_ERROR)
 		ft_printf("Error, the file doesn't exist\n");
 	else if (error == EMPTY_MAP)
 		ft_printf("Error, the map is empty\n");
@@ -36,7 +41,8 @@ void	ft_error(int error)
 	exit(1);
 }
 
-/*This function frees the main structure of the program just before the program's end:
+/*This function frees the main structure of the program just before the
+program's end:
 1 - Free the strings that represent the rows of the map.
 2 - Free the matrix itself, also in case it has been created but not filled.
 3 - Free the string where the name of the map has been stored. 
@@ -75,10 +81,10 @@ void	ft_print_map(t_game *game)
 		i++;
 	}
 	i = 0;
-	ft_printf("map_copy:\n");
+	/*ft_printf("map_copy:\n");
 	while (game->map_copy[i])
 	{
 		ft_printf("%s\n", game->map_copy[i]);
 		i++;
-	}
+	}*/
 }

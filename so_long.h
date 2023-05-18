@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/17 17:03:44 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/18 18:34:22 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 //S_P = sprite size
 # define S_SZ 32
+# define BAD_ARG 1
+# define EXTENSION_ERROR 2
 # define NOFILE_ERROR 3
 # define EMPTY_MAP 4
 # define INVALID_MAP 5
@@ -31,8 +33,6 @@ typedef struct s_game
 	char						*map_name;
 	char						**map;
 	char						**map_copy;
-	int							map_y;
-	int							map_x;
 	int							num_col;
 	int							num_row;
 	int							player_y;
@@ -43,9 +43,7 @@ typedef struct s_game
 	int							p_count;
 	int							e_count;
 	int							c_count;
-	int							sprite_w;
-	int							sprite_h;
-	int							is_pressed;
+	int							c_total;
  	mlx_t	*mlx;
 	mlx_image_t			*plyer_img;
 	mlx_image_t			*floor_img;
@@ -88,11 +86,13 @@ void	ft_generate_map(t_game *game);
 void	ft_render_player(t_game *game);
 
 //ply_moves.c
-//void	ft_controls(mlx_key_data_t keydata, void *param);
-void	ft_controls(void *param);
+void	ft_controls(mlx_key_data_t keydata, void *param);
 void	ft_up(t_game *game);
 void	ft_down(t_game *game);
 void	ft_left(t_game *game);
 void	ft_right(t_game *game);
+
+//utils.c
+int		ft_win(t_game *game, int y, int x);
 
 #endif

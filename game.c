@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:05:48 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/17 17:04:40 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/18 18:05:32 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,26 @@ void	ft_game_start(t_game *game)
 	ft_create_window(game);
 	ft_generate_map(game);
 	ft_render_player(game);
-	mlx_loop_hook(game->mlx, &ft_controls, game);
+	mlx_key_hook(game->mlx, &ft_controls, game);
+	//mlx_loop_hook(game->mlx, &ft_controls, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 }
 
-/*We generate a window with the size we already know the map has (num_col & num_row)
-* 32, as it is the size of the sprites in mlx_init. Then, we generate the textures
-based on the PNG files stored in /img and convert them into images that can be
-displayed on the window.
-We need to manually delete the textures to avoid residual garbage, so we do it in
-this function directly once they have been converted into images. On the other hand,
-we don't need to manually delete the images because mlx_terminate takes care of it
-for us. */
+/*We generate a window with the size we already know the map has (num_col &
+num_row) * 32, as it is the size of the sprites in mlx_init. Then, we generate
+the textures based on the PNG files stored in /img and convert them into images
+that can be displayed on the window.
+We need to manually delete the textures to avoid residual garbage, so we do it
+in this function directly once they have been converted into images. On the other
+hand, we don't need to manually delete the images because mlx_terminate takes
+care of it for us. */
 
 void	ft_create_window(t_game *game)
 {
 	t_texture	*texture;
 
-	texture = malloc(sizeof(t_texture)); //liberar memoria
+	texture = malloc(sizeof(t_texture));
 	game->mlx = mlx_init(game->num_col * 32, game->num_row * 32, "so_long", 0);
 	if (!game->mlx)
 		ft_printf("Error\nmlx_init failed\n");
@@ -56,12 +57,14 @@ void	ft_create_window(t_game *game)
 	mlx_delete_texture(texture->wall);
 	mlx_delete_texture(texture->exit);
 	mlx_delete_texture(texture->collec);
+	free(texture);
 }
 
-/*We traverse the entire map and assign the images to each object in the game, In 
-addition to using the function mlx_image_to_window to display it in the window.
-We also first place the floor image in all cells to ensure that the remaining sprites
-on't appear "hanging in the air" or without a base.*/
+/*We traverse the entire map and assign the images to each object in the game,
+in addition to using the function mlx_image_to_window to display it in the
+window.
+We also first place the floor image in all cells to ensure that the remaining
+sprites on't appear "hanging in the air" or without a base.*/
 
 void	ft_generate_map(t_game *game)
 {
@@ -88,9 +91,9 @@ void	ft_generate_map(t_game *game)
 	}
 }
 
-/*We assign the image to the player (P) separately to ensure that it remains on top of 
-the layers assigned by mlx, preventing it from "disappearing" beneath the layers of 
-other sprites.*/
+/*We assign the image to the player (P) separately to ensure that it remains on
+top of the layers assigned by mlx, preventing it from "disappearing" beneath the
+layers of other sprites.*/
 
 void	ft_render_player(t_game *game)
 {

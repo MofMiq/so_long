@@ -6,11 +6,15 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:31:21 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/16 16:31:26 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/18 17:14:26 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+/*This fucntion is to check errors in the map file.
+This line: game->c_total = game->c_count isn't withing ft_check_elements
+function just because the 25 lines restriction.*/
 
 void	ft_map_check(t_game *game)
 {
@@ -18,14 +22,12 @@ void	ft_map_check(t_game *game)
 
 	fd = open(game->map_name, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_printf("Error, the file doesn't exist\n"); //llamar a ft_error y poner NOFILE_ERROR
-		exit(1);
-	}
+		ft_error(NOFILE_ERROR);
 	ft_read_map(game, fd);
 	close(fd);
 	ft_check_map(game);
 	ft_check_elements(game);
+	game->c_total = game->c_count;
 	ft_flood_fill(game, game->player_y, game->player_x);
 	ft_valid_path(game);
 	ft_game_start(game);
@@ -35,11 +37,11 @@ void	ft_map_check(t_game *game)
 
 /*We read the map using get_next_line and we go line by line, retrieving all the
 rows of the map. We concatenate them into another variable called tmp, so that we
-have one huge line with the entire map. Then, we apply ft_split to it, generating a
-clean matrix within the structure (in reality, we create two matrices because we
-will later need a copy of the map when using ft_flood_fill).
-Additionally, we will perform two checks: first, if the file is empty, and then if
-the file starts with a '\n'*/
+have one huge line with the entire map. Then, we apply ft_split to it, generating
+a clean matrix within the structure (in reality, we create two matrices because
+we will later need a copy of the map when using ft_flood_fill).
+Additionally, we will perform two checks: first, if the file is empty, and then
+if the file starts with a '\n'*/
 
 void	ft_read_map(t_game *game, int fd)
 {
@@ -65,9 +67,9 @@ void	ft_read_map(t_game *game, int fd)
 	free(tmp_map_line);
 }
 
-/*We check for two potential errors related to the maps: ensuring that all rows have
-the same number of columns and checking for any gaps in the walls (absence of '1' in
-the rows).*/
+/*We check for two potential errors related to the maps: ensuring that all rows
+have the same number of columns and checking for any gaps in the walls (absence
+of '1' in the rows).*/
 
 void	ft_check_map(t_game *game)
 {
@@ -81,9 +83,10 @@ void	ft_check_map(t_game *game)
 		if (game->num_col != (int)ft_strlen(game->map[y]))
 			ft_error(BAD_ROW);
 		x = 0;
-		while(game->map[y][x])
+		while (game->map[y][x])
 		{
-			if (y == 0 || x == 0 || y == game->num_row - 1 || x == game->num_col - 1)
+			if (y == 0 || x == 0 || y == game->num_row - 1
+				|| x == game->num_col - 1)
 			{
 				if (game->map[y][x] != '1')
 					ft_error(NO_WALLS);
@@ -94,10 +97,11 @@ void	ft_check_map(t_game *game)
 	}
 }
 
-/*We verify that there are enough elements (characters) of each type: at least one
-collectible ('C'), exactly one player ('P'), and exactly one exit ('E'). Additionally,
-we save the position of the player in the structure for later use. We also check whether
-there is an undefined element in the map, such as an 'X'.*/
+/*We verify that there are enough elements (characters) of each type: at least
+one collectible ('C'), exactly one player ('P'), and exactly one exit ('E').
+Additionally, we save the position of the player in the structure for later use.
+We also check whether there is an undefined element in the map, such as an 'X'.
+*/
 
 void	ft_check_elements(t_game *game)
 {
@@ -128,14 +132,15 @@ void	ft_check_elements(t_game *game)
 		ft_error(ELEMENT_ERROR);
 }
 
-/*ft_flood_fill should fill all '0' with 'F' starting from the player's position ('P'). In
-other words, it should convert '0' and 'P' to 'F' to check if there is a valid path to the
-exit ('E').
-We also convert 'C' and 'E' to 0 because they are part of the valid path for the player.
-Surprisingly, these conversions will serve us in the future for another map check.
-These checks must be done with game->map_copy because by painting on the map, we are modifying
-it. Therefore, game->map would remain intact while still verifying if the player has a clear
-path to reach the exit*/
+/*ft_flood_fill should fill all '0' with 'F' starting from the player's
+position ('P'). In other words, it should convert '0' and 'P' to 'F' to
+check if there is a valid path to the exit ('E').
+We also convert 'C' and 'E' to 0 because they are part of the valid path for
+the player. Surprisingly, these conversions will serve us in the future for
+another map check.
+These checks must be done with game->map_copy because by painting on the map, we
+are modifying it. Therefore, game->map would remain intact while still verifying
+if the player has a clear path to reach the exit*/
 
 void	ft_flood_fill(t_game *game, int p_y, int p_x)
 {
@@ -153,10 +158,11 @@ void	ft_flood_fill(t_game *game, int p_y, int p_x)
 	ft_flood_fill(game, p_y, p_x - 1);
 }
 
-/*If there is a valid path, 'C' and 'E' are converted to '0'. In other words, if 'C' and 'E' have
-not become '0', it means they are surrounded by walls ('1'). Therefore, if after traversing the map
-again, there are still any 'C' or the 'E' intact, it means that it is not accessible for the player
-('P'), making it impossible to win.*/
+/*If there is a valid path, 'C' and 'E' are converted to '0'. In other words, if
+'C' and 'E' have not become '0', it means they are surrounded by walls ('1').
+Therefore, if after traversing the map again, there are still any 'C' or the 'E'
+intact, it means that it is not accessible for the player ('P'), making it
+impossible to win.*/
 
 void	ft_valid_path(t_game *game)
 {
