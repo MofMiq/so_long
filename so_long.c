@@ -18,6 +18,9 @@ void	ft_leaks(void)
 	exit(0);
 }
 
+/*We check if the file given as a parameter has the correct extension, which is 
+.ber.*/
+
 int	ft_check_arg(char *argv)
 {
 	int	i;
@@ -57,6 +60,10 @@ t_game	*ft_init_strcut(char *argv, t_game *game)
 	game->map_name = ft_strdup(argv);
 	return (game);
 }
+
+/*First of all, we check that the number of parameters is correct and if it's
+extension is okay. Then, we initialize the structure 'game' and the we are going
+to check all possible map errors before we open the window and start the game.*/
 
 int	main(int argc, char **argv)
 {
