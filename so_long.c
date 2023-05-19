@@ -6,18 +6,17 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:18:23 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/18 18:34:32 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/19 17:54:59 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_leaks(void)
+/*void	ft_leaks(void)
 {
 	system("leaks -q so_long");
 	exit(0);
-}
-
+}*/
 /*We check if the file given as a parameter has the correct extension, which is 
 .ber.*/
 
@@ -57,14 +56,37 @@ t_game	*ft_init_strcut(char *argv, t_game *game)
 	return (game);
 }
 
+/*This fucntion is to check errors in the map file.
+This line: game->c_total = game->c_count isn't withing ft_check_elements
+function just because the 25 lines restriction.*/
+
+void	ft_map_check(t_game *game)
+{
+	int	fd;
+
+	fd = open(game->map_name, O_RDONLY);
+	if (fd == -1)
+		ft_error(NOFILE_ERROR);
+	ft_read_map(game, fd);
+	close(fd);
+	ft_check_map(game);
+	ft_check_elements(game);
+	game->c_total = game->c_count;
+	ft_flood_fill(game, game->player_y, game->player_x);
+	ft_valid_path(game);
+	ft_game_start(game);
+	ft_free(game);
+	exit(0);
+}
+
 /*First of all, we check that the number of parameters is correct and if it's
 extension is okay. Then, we initialize the structure 'game' and the we are going
 to check all possible map errors before we open the window and start the game.
 */
+//atexit(ft_leaks);
 
 int	main(int argc, char **argv)
 {
-	atexit(ft_leaks);//
 	t_game	*game;
 
 	if (argc != 2)

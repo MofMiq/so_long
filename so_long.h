@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/18 18:34:22 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/19 17:56:18 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define INVALID_ELEMENT 8
 # define ELEMENT_ERROR 9
 # define IMPOSIBLE_WIN 10
+# define MLX_FAIL 11
 
 typedef struct s_game
 {
@@ -44,12 +45,12 @@ typedef struct s_game
 	int							e_count;
 	int							c_count;
 	int							c_total;
- 	mlx_t	*mlx;
-	mlx_image_t			*plyer_img;
-	mlx_image_t			*floor_img;
-	mlx_image_t			*wall_img;
-	mlx_image_t			*coll_img;
-	mlx_image_t			*exit_img;
+	mlx_t						*mlx;
+	mlx_image_t					*plyer_img;
+	mlx_image_t					*floor_img;
+	mlx_image_t					*wall_img;
+	mlx_image_t					*coll_img;
+	mlx_image_t					*exit_img;
 }	t_game;
 
 typedef struct s_texture
@@ -70,9 +71,10 @@ void	ft_error(int error);
 void	ft_free(t_game *game);
 //only for debugging
 void	ft_print_map(t_game *game);
+//main.c
+void	ft_map_check(t_game *game);
 
 //map_check.c
-void	ft_map_check(t_game *game);
 void	ft_read_map(t_game *game, int fd);
 void	ft_check_map(t_game *game);
 void	ft_check_elements(t_game *game);
@@ -94,5 +96,6 @@ void	ft_right(t_game *game);
 
 //utils.c
 int		ft_win(t_game *game, int y, int x);
+void	ft_eat_fish(t_game *game);
 
 #endif

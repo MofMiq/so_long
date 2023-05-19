@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:00:21 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/18 18:50:47 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/19 17:53:06 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ during the program's execution.*/
 		ft_printf("Error, the number of correct elements aren't invalid\n");
 	else if (error == IMPOSIBLE_WIN)
 		ft_printf("You can't win :(\n");
+	else if (error == MLX_FAIL)
+		ft_printf("MLX42 failed\n");
 	exit(1);
 }
 
@@ -81,10 +83,10 @@ void	ft_print_map(t_game *game)
 		i++;
 	}
 	i = 0;
-	/*ft_printf("map_copy:\n");
+	ft_printf("map_copy:\n");
 	while (game->map_copy[i])
 	{
 		ft_printf("%s\n", game->map_copy[i]);
 		i++;
-	}*/
+	}
 }

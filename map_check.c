@@ -6,34 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:31:21 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/18 17:14:26 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/19 17:45:42 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-/*This fucntion is to check errors in the map file.
-This line: game->c_total = game->c_count isn't withing ft_check_elements
-function just because the 25 lines restriction.*/
-
-void	ft_map_check(t_game *game)
-{
-	int	fd;
-
-	fd = open(game->map_name, O_RDONLY);
-	if (fd == -1)
-		ft_error(NOFILE_ERROR);
-	ft_read_map(game, fd);
-	close(fd);
-	ft_check_map(game);
-	ft_check_elements(game);
-	game->c_total = game->c_count;
-	ft_flood_fill(game, game->player_y, game->player_x);
-	ft_valid_path(game);
-	ft_game_start(game);
-	ft_free(game);
-	exit(0);
-}
 
 /*We read the map using get_next_line and we go line by line, retrieving all the
 rows of the map. We concatenate them into another variable called tmp, so that we

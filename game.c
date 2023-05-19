@@ -6,13 +6,14 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:05:48 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/18 18:05:32 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/19 17:53:23 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 //This function start the game and it is called after the map has been validated
+//mlx_loop_hook(game->mlx, &ft_controls, game);
 
 void	ft_game_start(t_game *game)
 {
@@ -20,7 +21,6 @@ void	ft_game_start(t_game *game)
 	ft_generate_map(game);
 	ft_render_player(game);
 	mlx_key_hook(game->mlx, &ft_controls, game);
-	//mlx_loop_hook(game->mlx, &ft_controls, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 }
@@ -47,6 +47,9 @@ void	ft_create_window(t_game *game)
 	texture->wall = mlx_load_png("img/wall.png");
 	texture->exit = mlx_load_png("img/exit.png");
 	texture->collec = mlx_load_png("img/fish.png");
+	if (!texture->player || !texture->floor || !texture->wall
+		|| !texture->exit || !texture->collec)
+		ft_error(MLX_FAIL);
 	game->plyer_img = mlx_texture_to_image(game->mlx, texture->player);
 	game->floor_img = mlx_texture_to_image(game->mlx, texture->floor);
 	game->wall_img = mlx_texture_to_image(game->mlx, texture->wall);

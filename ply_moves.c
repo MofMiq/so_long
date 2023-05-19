@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:33:58 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/18 19:57:16 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/19 17:33:19 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,17 @@ void	ft_up(t_game *game)
 		|| (game->map[game->curr_py - 1][game->curr_px] == 'E'
 			&& ft_win(game, game->curr_py - 1, game->curr_px)))
 		return ;
+	game->plyer_img->instances[0].y -= 32;
 	if (game->map[game->curr_py - 1][game->curr_px] == 'C')
 	{
-		game->c_count--; //
-		ft_printf("Fishes eaten\n");
-		game->coll_img->enabled = 0;
-		ft_print_map(game);
+		game->c_count--;
+		ft_eat_fish(game);
 	}
 	game->map[game->curr_py][game->curr_px] = '0';
 	game->map[game->curr_py - 1][game->curr_px] = 'P';
-	game->plyer_img->instances[0].y -= 32;
 	game->curr_py--;
 	game->moves++;
 	ft_printf("Moves: %d\n", game->moves);
-	ft_print_map(game);
 }
 
 //The 'down' movement is executed when we press 'S'. Idem.
@@ -82,20 +79,17 @@ void	ft_down(t_game *game)
 		|| (game->map[game->curr_py + 1][game->curr_px] == 'E'
 			&& !ft_win(game, game->curr_py + 1, game->curr_px)))
 		return ;
+	game->plyer_img->instances[0].y += 32;
 	if (game->map[game->curr_py + 1][game->curr_px] == 'C')
 	{
 		game->c_count--;
-		ft_printf("Fishes eaten\n");
-		game->coll_img->enabled = 0;
-		ft_print_map(game);
+		ft_eat_fish(game);
 	}
 	game->map[game->curr_py][game->curr_px] = '0';
 	game->map[game->curr_py + 1][game->curr_px] = 'P';
-	game->plyer_img->instances[0].y += 32;
 	game->curr_py++;
 	game->moves++;
 	ft_printf("Moves: %d\n", game->moves);
-	ft_print_map(game);
 }
 
 //The 'left' movement is executed when we press 'A'. Idem.
@@ -106,20 +100,17 @@ void	ft_left(t_game *game)
 		|| (game->map[game->curr_py][game->curr_px - 1] == 'E'
 			&& !ft_win(game, game->curr_py, game->curr_px - 1)))
 		return ;
+	game->plyer_img->instances[0].x -= 32;
 	if (game->map[game->curr_py][game->curr_px - 1] == 'C')
 	{
-		game->c_count--; //
-		ft_printf("Fishes eaten\n");
-		game->coll_img->enabled = 0;
-		ft_print_map(game);
+		game->c_count--;
+		ft_eat_fish(game);
 	}
 	game->map[game->curr_py][game->curr_px] = '0';
 	game->map[game->curr_py][game->curr_px - 1] = 'P';
-	game->plyer_img->instances[0].x -= 32;
 	game->curr_px--;
 	game->moves++;
 	ft_printf("Moves: %d\n", game->moves);
-	ft_print_map(game);
 }
 
 //The 'right' movement is executed when we press 'D'. Idem.
@@ -130,18 +121,15 @@ void	ft_right(t_game *game)
 		|| (game->map[game->curr_py][game->curr_px + 1] == 'E'
 			&& !ft_win(game, game->curr_py, game->curr_px + 1)))
 		return ;
+	game->plyer_img->instances[0].x += 32;
 	if (game->map[game->curr_py][game->curr_px + 1] == 'C')
 	{
-		game->c_count--; //
-		ft_printf("Fishes eaten\n");
-		game->coll_img->enabled = 0;
-		ft_print_map(game);
+		game->c_count--;
+		ft_eat_fish(game);
 	}
 	game->map[game->curr_py][game->curr_px] = '0';
 	game->map[game->curr_py][game->curr_px + 1] = 'P';
-	game->plyer_img->instances[0].x += 32;
 	game->curr_px++;
 	game->moves++;
 	ft_printf("Moves: %d\n", game->moves);
-	ft_print_map(game);
 }
