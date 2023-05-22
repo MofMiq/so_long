@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/22 18:45:58 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:24:32 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/libft.h"
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
+# include "../MLX42/include/MLX42/MLX42.h"
+# include "../libft/libft.h"
 
 //S_P = sprite size
 # define S_SZ 32
@@ -45,12 +45,16 @@ typedef struct s_game
 	int							e_count;
 	int							c_count;
 	int							c_total;
+	int							enemy_c;
 	mlx_t						*mlx;
+	mlx_image_t					*score;
 	mlx_image_t					*plyer_img;
 	mlx_image_t					*floor_img;
 	mlx_image_t					*wall_img;
 	mlx_image_t					*coll_img;
 	mlx_image_t					*exit_img;
+	mlx_image_t					*enemy_img;
+	mlx_image_t					*exit_cat;
 }	t_game;
 
 typedef struct s_texture
@@ -60,6 +64,8 @@ typedef struct s_texture
 	mlx_texture_t		*wall;
 	mlx_texture_t		*collec;
 	mlx_texture_t		*exit;
+	mlx_texture_t		*enemy;
+	mlx_texture_t		*exit_cat;
 }	t_texture;
 
 //main.c
@@ -97,5 +103,6 @@ void	ft_right(t_game *game);
 //utils.c
 int		ft_win(t_game *game, int y, int x);
 void	ft_eat_fish(t_game *game);
+void	ft_score(t_game *game);
 
 #endif

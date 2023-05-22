@@ -6,11 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:15:14 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/22 18:51:26 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:30:29 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 /*function that check if all collectibles have been taken, to know if you win
 the game (and exit the window).*/
@@ -53,4 +53,16 @@ void	ft_eat_fish(t_game *game)
 		}
 		i++;
 	}
+}
+
+
+//aqui ahy segmentation fault
+void	ft_score(t_game *game)
+{
+	char	*score;
+
+	score = ft_itoa(game->moves);
+	mlx_delete_image(game->mlx, game->score);
+	game->score = mlx_put_string(game->mlx, score, 10, 10);
+	free(score);
 }
