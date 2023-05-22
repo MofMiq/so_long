@@ -59,10 +59,10 @@ void	ft_eat_fish(t_game *game)
 //aqui ahy segmentation fault
 void	ft_score(t_game *game)
 {
-	char	*score;
+	char	*text;
 
-	score = ft_itoa(game->moves);
+	text = ft_itoa(game->moves);
 	mlx_delete_image(game->mlx, game->score);
-	game->score = mlx_put_string(game->mlx, score, 10, 10);
-	free(score);
+	game->score = mlx_put_string(game->mlx, text, 10, 10);
+	free(text);
 }
