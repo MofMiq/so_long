@@ -6,11 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:05:48 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/22 16:40:20 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/22 18:49:55 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 //This function start the game and it is called after the map has been validated
 //mlx_loop_hook(game->mlx, &ft_controls, game);
