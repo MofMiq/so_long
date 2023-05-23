@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:31:21 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/22 18:50:15 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:10:03 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_check_elements(t_game *game)
 				game->e_count++;
 			else if (game->map[y][x] == 'C')
 				game->c_count++;
-			else if (game->map[y][x] != '0' && game->map[y][x] != '1')
+			else if (!ft_strchr("10D", game->map[y][x]))
 				ft_error(INVALID_ELEMENT);
 		}
 	}
@@ -123,7 +123,8 @@ void	ft_flood_fill(t_game *game, int p_y, int p_x)
 {
 	if (p_y < 0 || p_x < 0 || p_y > game->num_row
 		|| p_x > game->num_col || game->map_copy[p_y][p_x] == '1'
-			|| game->map_copy[p_y][p_x] == 'F')
+			|| game->map_copy[p_y][p_x] == 'F'
+				|| game->map_copy[p_y][p_x] == 'D')
 		return ;
 	if (game->map_copy[p_y][p_x] == 'E'
 			|| game->map_copy[p_y][p_x] == 'C')

@@ -6,24 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:05:48 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/22 18:49:55 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:18:22 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-//This function start the game and it is called after the map has been validated
-//mlx_loop_hook(game->mlx, &ft_controls, game);
-
-void	ft_game_start(t_game *game)
-{
-	ft_create_window(game);
-	ft_generate_map(game);
-	ft_render_player(game);
-	mlx_key_hook(game->mlx, &ft_controls, game);
-	mlx_loop(game->mlx);
-	mlx_terminate(game->mlx);
-}
 
 /*We generate a window with the size we already know the map has (num_col &
 num_row) * 32, as it is the size of the sprites in mlx_init. Then, we generate
@@ -42,24 +29,44 @@ void	ft_create_window(t_game *game)
 	game->mlx = mlx_init(game->num_col * 32, game->num_row * 32, "so_long", 0);
 	if (!game->mlx)
 		ft_printf("Error\nmlx_init failed\n");
-	texture->player = mlx_load_png("img/cat_32.png");
+	texture->player = mlx_load_png("img/cat_d.png");
+	texture->player_a = mlx_load_png("img/cat_a.png");
 	texture->floor = mlx_load_png("img/floor.png");
 	texture->wall = mlx_load_png("img/wall.png");
 	texture->exit = mlx_load_png("img/exit.png");
 	texture->collec = mlx_load_png("img/fish.png");
+	texture->exit_cat = mlx_load_png("img/exit_cat.png");
+	texture->enemy = mlx_load_png("img/dog_2.png");
 	if (!texture->player || !texture->floor || !texture->wall
-		|| !texture->exit || !texture->collec)
+		|| !texture->exit || !texture->collec || !texture->exit_cat
+		|| !texture->player_a || !texture->enemy)
 		ft_error(MLX_FAIL);
-	game->plyer_img = mlx_texture_to_image(game->mlx, texture->player);
+	ft_texture_to_image(game, texture);
+	ft_delete_texture(texture);
+}
+
+void	ft_texture_to_image(t_game *game, t_texture *texture)
+{
+	game->plyer_d = mlx_texture_to_image(game->mlx, texture->player);
+	game->plyer_a = mlx_texture_to_image(game->mlx, texture->player_a);
 	game->floor_img = mlx_texture_to_image(game->mlx, texture->floor);
 	game->wall_img = mlx_texture_to_image(game->mlx, texture->wall);
 	game->exit_img = mlx_texture_to_image(game->mlx, texture->exit);
 	game->coll_img = mlx_texture_to_image(game->mlx, texture->collec);
+	game->exit_cat = mlx_texture_to_image(game->mlx, texture->exit_cat);
+	game->enemy_img = mlx_texture_to_image(game->mlx, texture->enemy);
+}
+
+void	ft_delete_texture(t_texture *texture)
+{
 	mlx_delete_texture(texture->player);
+	mlx_delete_texture(texture->player_a);
 	mlx_delete_texture(texture->floor);
 	mlx_delete_texture(texture->wall);
 	mlx_delete_texture(texture->exit);
 	mlx_delete_texture(texture->collec);
+	mlx_delete_texture(texture->exit_cat);
+	mlx_delete_texture(texture->enemy);
 	free(texture);
 }
 
@@ -75,9 +82,9 @@ void	ft_generate_map(t_game *game)
 	int	x;
 
 	y = 0;
-	x = 0;
 	while (game->map[y])
 	{
+		x = 0;
 		while (game->map[y][x])
 		{
 			mlx_image_to_window(game->mlx, game->floor_img, x * 32, y * 32);
@@ -86,10 +93,14 @@ void	ft_generate_map(t_game *game)
 			else if (game->map[y][x] == 'C')
 				mlx_image_to_window(game->mlx, game->coll_img, x * 32, y * 32);
 			else if (game->map[y][x] == 'E')
+			{
+				mlx_image_to_window(game->mlx, game->exit_cat, x * 32, y * 32);
 				mlx_image_to_window(game->mlx, game->exit_img, x * 32, y * 32);
+			}
+			else if (game->map[y][x] == 'D')
+				mlx_image_to_window(game->mlx, game->enemy_img, x * 32, y * 32);
 			x++;
 		}
-		x = 0;
 		y++;
 	}
 }
@@ -110,7 +121,11 @@ void	ft_render_player(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == 'P')
-				mlx_image_to_window(game->mlx, game->plyer_img, x * 32, y * 32);
+			{
+				mlx_image_to_window(game->mlx, game->plyer_d, x * 32, y * 32);
+				mlx_image_to_window(game->mlx, game->plyer_a, x * 32, y * 32);
+				game->plyer_a->instances[0].enabled = 0;
+			}
 			x++;
 		}
 		x = 0;

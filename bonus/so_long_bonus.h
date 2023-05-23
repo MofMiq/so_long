@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/22 19:24:32 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:53:01 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ typedef struct s_game
 	int							c_count;
 	int							c_total;
 	int							enemy_c;
+	int							flag;
 	mlx_t						*mlx;
 	mlx_image_t					*score;
-	mlx_image_t					*plyer_img;
+	mlx_image_t					*plyer_d;
+	mlx_image_t					*plyer_a;
 	mlx_image_t					*floor_img;
 	mlx_image_t					*wall_img;
 	mlx_image_t					*coll_img;
@@ -60,6 +62,7 @@ typedef struct s_game
 typedef struct s_texture
 {
 	mlx_texture_t		*player;
+	mlx_texture_t		*player_a;
 	mlx_texture_t		*floor;
 	mlx_texture_t		*wall;
 	mlx_texture_t		*collec;
@@ -68,17 +71,16 @@ typedef struct s_texture
 	mlx_texture_t		*exit_cat;
 }	t_texture;
 
-//main.c
-int		ft_check_arg(char *argv);
-t_game	*ft_init_strcut(char *argv, t_game *game);
 
 //free_n_error.c
 void	ft_error(int error);
 void	ft_free(t_game *game);
-//only for debugging
 void	ft_print_map(t_game *game);
+
 //main.c
-void	ft_map_check(t_game *game);
+t_game	*ft_init_strcut(char *argv, t_game *game);
+void	ft_validate_map(t_game *game);
+void	ft_game_start(t_game *game);
 
 //map_check.c
 void	ft_read_map(t_game *game, int fd);
@@ -88,10 +90,11 @@ void	ft_flood_fill(t_game *game, int p_y, int p_x);
 void	ft_valid_path(t_game *game);
 
 //game.c
-void	ft_game_start(t_game *game);
 void	ft_create_window(t_game *game);
 void	ft_generate_map(t_game *game);
 void	ft_render_player(t_game *game);
+void	ft_texture_to_image(t_game *game, t_texture *texture);
+void	ft_delete_texture(t_texture *texture);
 
 //ply_moves.c
 void	ft_controls(mlx_key_data_t keydata, void *param);
@@ -101,8 +104,13 @@ void	ft_left(t_game *game);
 void	ft_right(t_game *game);
 
 //utils.c
+int		ft_check_arg(char *argv);
 int		ft_win(t_game *game, int y, int x);
 void	ft_eat_fish(t_game *game);
 void	ft_score(t_game *game);
+
+//enemy.c
+void	ft_check_enemy(t_game *game);
+void	ft_you_died(t_game *game);
 
 #endif
