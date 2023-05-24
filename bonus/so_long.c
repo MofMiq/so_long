@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:18:23 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/23 19:17:30 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:24:56 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ t_game	*ft_init_strcut(char *argv, t_game *game)
 	game->p_count = 0;
 	game->e_count = 0;
 	game->c_count = 0;
-	game->c_total = 0;
 	game->enemy_c = 0;
 	game->moves = 0;
 	game->mlx = NULL;
 	game->plyer_d = NULL;
 	game->plyer_a = NULL;
+	game->plyer_w = NULL;
+	game->plyer_s = NULL;
 	game->floor_img = NULL;
 	game->wall_img = NULL;
 	game->coll_img = NULL;
@@ -76,7 +77,7 @@ void	ft_validate_map(t_game *game)
 void	ft_game_start(t_game *game)
 {
 	ft_create_window(game);
-	ft_generate_map(game);
+	ft_render_map(game);
 	ft_render_player(game);
 	mlx_key_hook(game->mlx, &ft_controls, game);
 	mlx_loop(game->mlx);

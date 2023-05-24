@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:05:48 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/23 19:18:22 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:24:11 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_create_window(t_game *game)
 		ft_printf("Error\nmlx_init failed\n");
 	texture->player = mlx_load_png("img/cat_d.png");
 	texture->player_a = mlx_load_png("img/cat_a.png");
+	texture->player_w = mlx_load_png("img/cat_w.png");
+	texture->player_s = mlx_load_png("img/cat_s.png");
 	texture->floor = mlx_load_png("img/floor.png");
 	texture->wall = mlx_load_png("img/wall.png");
 	texture->exit = mlx_load_png("img/exit.png");
@@ -39,7 +41,8 @@ void	ft_create_window(t_game *game)
 	texture->enemy = mlx_load_png("img/dog_2.png");
 	if (!texture->player || !texture->floor || !texture->wall
 		|| !texture->exit || !texture->collec || !texture->exit_cat
-		|| !texture->player_a || !texture->enemy)
+		|| !texture->player_a || !texture->enemy || !texture->player_w
+		|| !texture->player_s)
 		ft_error(MLX_FAIL);
 	ft_texture_to_image(game, texture);
 	ft_delete_texture(texture);
@@ -49,6 +52,8 @@ void	ft_texture_to_image(t_game *game, t_texture *texture)
 {
 	game->plyer_d = mlx_texture_to_image(game->mlx, texture->player);
 	game->plyer_a = mlx_texture_to_image(game->mlx, texture->player_a);
+	game->plyer_w = mlx_texture_to_image(game->mlx, texture->player_w);
+	game->plyer_s = mlx_texture_to_image(game->mlx, texture->player_s);
 	game->floor_img = mlx_texture_to_image(game->mlx, texture->floor);
 	game->wall_img = mlx_texture_to_image(game->mlx, texture->wall);
 	game->exit_img = mlx_texture_to_image(game->mlx, texture->exit);
@@ -61,6 +66,8 @@ void	ft_delete_texture(t_texture *texture)
 {
 	mlx_delete_texture(texture->player);
 	mlx_delete_texture(texture->player_a);
+	mlx_delete_texture(texture->player_w);
+	mlx_delete_texture(texture->player_s);
 	mlx_delete_texture(texture->floor);
 	mlx_delete_texture(texture->wall);
 	mlx_delete_texture(texture->exit);
@@ -76,7 +83,7 @@ window.
 We also first place the floor image in all cells to ensure that the remaining
 sprites don't appear "hanging in the air" or without a base.*/
 
-void	ft_generate_map(t_game *game)
+void	ft_render_map(t_game *game)
 {
 	int	y;
 	int	x;
@@ -124,7 +131,11 @@ void	ft_render_player(t_game *game)
 			{
 				mlx_image_to_window(game->mlx, game->plyer_d, x * 32, y * 32);
 				mlx_image_to_window(game->mlx, game->plyer_a, x * 32, y * 32);
+				mlx_image_to_window(game->mlx, game->plyer_w, x * 32, y * 32);
+				mlx_image_to_window(game->mlx, game->plyer_s, x * 32, y * 32);
 				game->plyer_a->instances[0].enabled = 0;
+				game->plyer_w->instances[0].enabled = 0;
+				game->plyer_s->instances[0].enabled = 0;
 			}
 			x++;
 		}

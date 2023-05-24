@@ -6,11 +6,14 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:43:25 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/23 19:53:04 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:14:26 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+/*This function is like ft_check_elements but for the character 'D' (the enemy).
+It's not done in ft_check_elements because the 25 lines restriction (again).*/
 
 void	ft_check_enemy(t_game *game)
 {
@@ -31,7 +34,10 @@ void	ft_check_enemy(t_game *game)
 		ft_error(ELEMENT_ERROR);
 }
 
-//	mlx_close_window(game->mlx);
+/*This function is for making the player character disappear and displaying a
+defeat message on the screen when the player touches the enemy.*/
+
+//mlx_close_window(game->mlx);
 
 void	ft_you_died(t_game *game)
 {
@@ -43,5 +49,7 @@ void	ft_you_died(t_game *game)
 		ft_printf("Bad doggy\n");
 		game->plyer_d->instances[0].enabled = 0;
 		game->plyer_a->instances[0].enabled = 0;
+		game->plyer_w->instances[0].enabled = 0;
+		game->plyer_s->instances[0].enabled = 0;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:15:14 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/23 19:33:07 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:09:11 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	ft_check_arg(char *argv)
 		return (1);
 }
 
-/*function that check if all collectibles have been taken, to know if you win
-the game (and exit the window).*/
-				//mlx_close_window(game->mlx);
+/*This function is used to verify that all the collectibles have been taken
+before being able to access the exit.*/
+//mlx_close_window(game->mlx);
 
 int	ft_win(t_game *game, int y, int x)
 {
@@ -41,8 +41,10 @@ int	ft_win(t_game *game, int y, int x)
 			if (game->map[y][x] == 'E')
 			{
 				game->flag = 1;
-				game->plyer_d->instances[0].enabled = 0;
+				game->plyer_d->instances[0].x = 100000;
 				game->plyer_a->instances[0].x = 100000;
+				game->plyer_w->instances[0].x = 100000;
+				game->plyer_s->instances[0].x = 100000;
 				mlx_delete_image(game->mlx, game->exit_img);
 				ft_printf("YASS, 20 hours of sleep straight\n");
 				return (1);
@@ -54,8 +56,8 @@ int	ft_win(t_game *game, int y, int x)
 	return (0);
 }
 
-/*esta funcion comprueba la posicion de los coleccionables y cuando una
-coincide con la del jugardor, desactiva esa instancia.*/
+/*This function checks the position of the collectibles, and when one matches
+the player's position, it deactivates that instance.*/
 
 void	ft_eat_fish(t_game *game)
 {
@@ -75,6 +77,12 @@ void	ft_eat_fish(t_game *game)
 		i++;
 	}
 }
+
+/*This function display the number of movements made by the player on the
+screen. Two things should be taken into account: firstly, the mlx_put_string
+function converts the string into an image to enable screen display. And
+lastly, the number of movements needs to be converted into characters before
+being displayed.*/
 
 void	ft_score(t_game *game)
 {

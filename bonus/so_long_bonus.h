@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/23 19:53:01 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:22:19 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_game
 	mlx_image_t					*score;
 	mlx_image_t					*plyer_d;
 	mlx_image_t					*plyer_a;
+	mlx_image_t					*plyer_w;
+	mlx_image_t					*plyer_s;
 	mlx_image_t					*floor_img;
 	mlx_image_t					*wall_img;
 	mlx_image_t					*coll_img;
@@ -63,6 +65,8 @@ typedef struct s_texture
 {
 	mlx_texture_t		*player;
 	mlx_texture_t		*player_a;
+	mlx_texture_t		*player_w;
+	mlx_texture_t		*player_s;
 	mlx_texture_t		*floor;
 	mlx_texture_t		*wall;
 	mlx_texture_t		*collec;
@@ -91,7 +95,7 @@ void	ft_valid_path(t_game *game);
 
 //game.c
 void	ft_create_window(t_game *game);
-void	ft_generate_map(t_game *game);
+void	ft_render_map(t_game *game);
 void	ft_render_player(t_game *game);
 void	ft_texture_to_image(t_game *game, t_texture *texture);
 void	ft_delete_texture(t_texture *texture);
