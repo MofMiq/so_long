@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:33:58 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/22 19:26:45 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:50:52 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,19 @@ void	ft_controls(mlx_key_data_t keydata, void *param)
 	t_game	*game;
 
 	game = param;
-	game->curr_py = game->plyer_img->instances[0].y / 32;
-	game->curr_px = game->plyer_img->instances[0].x / 32;
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
-		ft_up(game);
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
-		ft_down(game);
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
-		ft_left(game);
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
-		ft_right(game);
+	game->curr_py = game->plyer_d->instances[0].y / 32;
+	game->curr_px = game->plyer_d->instances[0].x / 32;
+	if (game->flag == 0)
+	{
+		if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
+			ft_up(game);
+		if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
+			ft_down(game);
+		if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
+			ft_left(game);
+		if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
+			ft_right(game);
+	}
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 		mlx_close_window(game->mlx);
 }
@@ -58,12 +61,12 @@ void	ft_up(t_game *game)
 		|| (game->map[game->curr_py - 1][game->curr_px] == 'E'
 			&& ft_win(game, game->curr_py - 1, game->curr_px)))
 		return ;
-	game->plyer_img->instances[0].y -= 32;
+	game->plyer_d->instances[0].y -= 32;
+	game->plyer_a->instances[0].y -= 32;
+	if (game->map[game->curr_py - 1][game->curr_px] == 'D')
+		ft_you_died(game);
 	if (game->map[game->curr_py - 1][game->curr_px] == 'C')
-	{
-		game->c_count--;
 		ft_eat_fish(game);
-	}
 	game->map[game->curr_py][game->curr_px] = '0';
 	game->map[game->curr_py - 1][game->curr_px] = 'P';
 	game->curr_py--;
@@ -80,12 +83,12 @@ void	ft_down(t_game *game)
 		|| (game->map[game->curr_py + 1][game->curr_px] == 'E'
 			&& !ft_win(game, game->curr_py + 1, game->curr_px)))
 		return ;
-	game->plyer_img->instances[0].y += 32;
+	game->plyer_d->instances[0].y += 32;
+	game->plyer_a->instances[0].y += 32;
+	if (game->map[game->curr_py + 1][game->curr_px] == 'D')
+		ft_you_died(game);
 	if (game->map[game->curr_py + 1][game->curr_px] == 'C')
-	{
-		game->c_count--;
 		ft_eat_fish(game);
-	}
 	game->map[game->curr_py][game->curr_px] = '0';
 	game->map[game->curr_py + 1][game->curr_px] = 'P';
 	game->curr_py++;
@@ -98,16 +101,19 @@ void	ft_down(t_game *game)
 
 void	ft_left(t_game *game)
 {
+
 	if (game->map[game->curr_py][game->curr_px - 1] == '1'
 		|| (game->map[game->curr_py][game->curr_px - 1] == 'E'
 			&& !ft_win(game, game->curr_py, game->curr_px - 1)))
 		return ;
-	game->plyer_img->instances[0].x -= 32;
+	game->plyer_d->instances[0].x -= 32;
+	game->plyer_a->instances[0].x -= 32;
+	game->plyer_d->instances[0].enabled = 0;
+	game->plyer_a->instances[0].enabled = 1;
+	if (game->map[game->curr_py][game->curr_px - 1] == 'D')
+		ft_you_died(game);
 	if (game->map[game->curr_py][game->curr_px - 1] == 'C')
-	{
-		game->c_count--;
 		ft_eat_fish(game);
-	}
 	game->map[game->curr_py][game->curr_px] = '0';
 	game->map[game->curr_py][game->curr_px - 1] = 'P';
 	game->curr_px--;
@@ -124,12 +130,14 @@ void	ft_right(t_game *game)
 		|| (game->map[game->curr_py][game->curr_px + 1] == 'E'
 			&& !ft_win(game, game->curr_py, game->curr_px + 1)))
 		return ;
-	game->plyer_img->instances[0].x += 32;
+	game->plyer_d->instances[0].x += 32;
+	game->plyer_a->instances[0].x += 32;
+	game->plyer_d->instances[0].enabled = 1;
+	game->plyer_a->instances[0].enabled = 0;
+	if (game->map[game->curr_py][game->curr_px + 1] == 'D')
+		ft_you_died(game);
 	if (game->map[game->curr_py][game->curr_px + 1] == 'C')
-	{
-		game->c_count--;
 		ft_eat_fish(game);
-	}
 	game->map[game->curr_py][game->curr_px] = '0';
 	game->map[game->curr_py][game->curr_px + 1] = 'P';
 	game->curr_px++;

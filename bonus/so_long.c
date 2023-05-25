@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:18:23 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/22 19:17:20 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:17:30 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,6 @@ void	ft_leaks(void)
 {
 	system("leaks -q so_long");
 	exit(0);
-}
-/*We check if the file given as a parameter has the correct extension, which is 
-.ber.*/
-
-int	ft_check_arg(char *argv)
-{
-	int	i;
-
-	i = 0;
-	while (argv[i] != '.')
-		i++;
-	if (ft_strcmp(&argv[i], ".ber") == 0)
-		return (0);
-	else
-		return (1);
 }
 
 t_game	*ft_init_strcut(char *argv, t_game *game)
@@ -45,14 +30,18 @@ t_game	*ft_init_strcut(char *argv, t_game *game)
 	game->e_count = 0;
 	game->c_count = 0;
 	game->c_total = 0;
+	game->enemy_c = 0;
 	game->moves = 0;
 	game->mlx = NULL;
-	game->plyer_img = NULL;
+	game->plyer_d = NULL;
+	game->plyer_a = NULL;
 	game->floor_img = NULL;
 	game->wall_img = NULL;
 	game->coll_img = NULL;
 	game->exit_img = NULL;
 	game->score = NULL;
+	game->exit_cat = NULL;
+	game->flag = 0;
 	game->map_name = ft_strdup(argv);
 	return (game);
 }
@@ -61,7 +50,7 @@ t_game	*ft_init_strcut(char *argv, t_game *game)
 This line: game->c_total = game->c_count isn't withing ft_check_elements
 function just because the 25 lines restriction.*/
 
-void	ft_map_check(t_game *game)
+void	ft_validate_map(t_game *game)
 {
 	int	fd;
 
@@ -72,12 +61,26 @@ void	ft_map_check(t_game *game)
 	close(fd);
 	ft_check_map(game);
 	ft_check_elements(game);
+	ft_check_enemy(game);
 	game->c_total = game->c_count;
 	ft_flood_fill(game, game->player_y, game->player_x);
 	ft_valid_path(game);
 	ft_game_start(game);
 	ft_free(game);
 	exit(0);
+}
+
+//This function start the game and it is called after the map has been validated
+//mlx_loop_hook(game->mlx, &ft_controls, game);
+
+void	ft_game_start(t_game *game)
+{
+	ft_create_window(game);
+	ft_generate_map(game);
+	ft_render_player(game);
+	mlx_key_hook(game->mlx, &ft_controls, game);
+	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
 }
 
 /*First of all, we check that the number of parameters is correct and if it's
@@ -96,5 +99,5 @@ int	main(int argc, char **argv)
 		ft_error(EXTENSION_ERROR);
 	game = (t_game *)malloc(sizeof(t_game));
 	ft_init_strcut(argv[1], game);
-	ft_map_check(game);
+	ft_validate_map(game);
 }

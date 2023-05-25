@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/04 16:03:19 by marirodr          #+#    #+#              #
-#    Updated: 2023/05/22 18:29:22 by marirodr         ###   ########.fr        #
+#    Updated: 2023/05/23 18:44:16 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC			=	so_long.c free_n_error.c map_check.c game.c ply_moves.c \
 				utils.c \
 
 SRC_BONUS = 	bonus/so_long.c bonus/free_n_error.c bonus/map_check.c \
-				bonus/game.c bonus/ply_moves.c bonus/utils.c \
+				bonus/game.c bonus/ply_moves.c bonus/utils.c bonus/enemy.c \
 			  
 OBJ			=	$(SRC:.c=.o)
 
