@@ -6,11 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:33:58 by marirodr          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/23 19:50:52 by marirodr         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/24 17:18:30 by marirodr         ###   ########.fr       */
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
+/*   Updated: 2023/05/25 17:09:41 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +18,8 @@ calls another function that specifies how the movement will occur within the map
 ESC key that closes the game and the window.
 We calculate the player's position in the map through the instance, which is the
 image and we divide it by the size of the sprites.
-To ensure that the player moves one cell at a time instead of continuously, we
-create a boolean variable called 'is_pressed' within the 'game' structure that
-prevents excessive movements.*/
+Flag is a bool that I use simply so thatb when the player dies from touching an
+enemy, the stop moving.*/
 
 void	ft_controls(mlx_key_data_t keydata, void *param)
 {
@@ -55,20 +50,12 @@ If the player encounters a collectible, the ft_collectibles function is executed
 For any other case, the following steps are performed:
 1 - Move the image through the instance in the desired direction.
 2 - Update the player's position on the map based on '1' and '0'.
-3 - Increment the player's total movement count by one in 'moves'.
-4 - Set the boolean variable is_pressed to 1 to prevent additional movements from
-being executed.*/
+3 - Increment the player's total movement count by one in 'moves'.*/
 
 void	ft_up(t_game *game)
 {
 	if (game->map[game->curr_py - 1][game->curr_px] == '1'
 		|| (game->map[game->curr_py - 1][game->curr_px] == 'E'
-<<<<<<< HEAD
-			&& ft_win(game, game->curr_py - 1, game->curr_px)))
-		return ;
-	game->plyer_d->instances[0].y -= 32;
-	game->plyer_a->instances[0].y -= 32;
-=======
 			&& !ft_win(game, game->curr_py - 1, game->curr_px)))
 		return ;
 	game->plyer_d->instances[0].y -= 32;
@@ -79,7 +66,6 @@ void	ft_up(t_game *game)
 	game->plyer_a->instances[0].enabled = 0;
 	game->plyer_w->instances[0].enabled = 1;
 	game->plyer_s->instances[0].enabled = 0;
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	if (game->map[game->curr_py - 1][game->curr_px] == 'D')
 		ft_you_died(game);
 	if (game->map[game->curr_py - 1][game->curr_px] == 'C')
@@ -102,15 +88,12 @@ void	ft_down(t_game *game)
 		return ;
 	game->plyer_d->instances[0].y += 32;
 	game->plyer_a->instances[0].y += 32;
-<<<<<<< HEAD
-=======
 	game->plyer_w->instances[0].y += 32;
 	game->plyer_s->instances[0].y += 32;
 	game->plyer_d->instances[0].enabled = 0;
 	game->plyer_a->instances[0].enabled = 0;
 	game->plyer_w->instances[0].enabled = 0;
 	game->plyer_s->instances[0].enabled = 1;
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	if (game->map[game->curr_py + 1][game->curr_px] == 'D')
 		ft_you_died(game);
 	if (game->map[game->curr_py + 1][game->curr_px] == 'C')
@@ -127,24 +110,18 @@ void	ft_down(t_game *game)
 
 void	ft_left(t_game *game)
 {
-
 	if (game->map[game->curr_py][game->curr_px - 1] == '1'
 		|| (game->map[game->curr_py][game->curr_px - 1] == 'E'
 			&& !ft_win(game, game->curr_py, game->curr_px - 1)))
 		return ;
 	game->plyer_d->instances[0].x -= 32;
 	game->plyer_a->instances[0].x -= 32;
-<<<<<<< HEAD
-	game->plyer_d->instances[0].enabled = 0;
-	game->plyer_a->instances[0].enabled = 1;
-=======
 	game->plyer_w->instances[0].x -= 32;
 	game->plyer_s->instances[0].x -= 32;
 	game->plyer_d->instances[0].enabled = 0;
 	game->plyer_a->instances[0].enabled = 1;
 	game->plyer_w->instances[0].enabled = 0;
 	game->plyer_s->instances[0].enabled = 0;
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	if (game->map[game->curr_py][game->curr_px - 1] == 'D')
 		ft_you_died(game);
 	if (game->map[game->curr_py][game->curr_px - 1] == 'C')
@@ -167,17 +144,12 @@ void	ft_right(t_game *game)
 		return ;
 	game->plyer_d->instances[0].x += 32;
 	game->plyer_a->instances[0].x += 32;
-<<<<<<< HEAD
-	game->plyer_d->instances[0].enabled = 1;
-	game->plyer_a->instances[0].enabled = 0;
-=======
 	game->plyer_w->instances[0].x += 32;
 	game->plyer_s->instances[0].x += 32;
 	game->plyer_d->instances[0].enabled = 1;
 	game->plyer_a->instances[0].enabled = 0;
 	game->plyer_w->instances[0].enabled = 0;
 	game->plyer_s->instances[0].enabled = 0;
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	if (game->map[game->curr_py][game->curr_px + 1] == 'D')
 		ft_you_died(game);
 	if (game->map[game->curr_py][game->curr_px + 1] == 'C')

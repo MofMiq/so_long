@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/22 18:45:58 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:57:49 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,13 @@ typedef struct s_texture
 }	t_texture;
 
 //main.c
-int		ft_check_arg(char *argv);
 t_game	*ft_init_strcut(char *argv, t_game *game);
+void	ft_map_check(t_game *game);
 
 //free_n_error.c
 void	ft_error(int error);
 void	ft_free(t_game *game);
-//only for debugging
 void	ft_print_map(t_game *game);
-//main.c
-void	ft_map_check(t_game *game);
 
 //map_check.c
 void	ft_read_map(t_game *game, int fd);
@@ -84,7 +81,7 @@ void	ft_valid_path(t_game *game);
 //game.c
 void	ft_game_start(t_game *game);
 void	ft_create_window(t_game *game);
-void	ft_generate_map(t_game *game);
+void	ft_render_map(t_game *game);
 void	ft_render_player(t_game *game);
 
 //ply_moves.c
@@ -95,6 +92,7 @@ void	ft_left(t_game *game);
 void	ft_right(t_game *game);
 
 //utils.c
+int		ft_check_arg(char *argv);
 int		ft_win(t_game *game, int y, int x);
 void	ft_eat_fish(t_game *game);
 

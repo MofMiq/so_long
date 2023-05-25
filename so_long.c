@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:18:23 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/19 17:54:59 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:58:09 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,6 @@
 	system("leaks -q so_long");
 	exit(0);
 }*/
-/*We check if the file given as a parameter has the correct extension, which is 
-.ber.*/
-
-int	ft_check_arg(char *argv)
-{
-	int	i;
-
-	i = 0;
-	while (argv[i] != '.')
-		i++;
-	if (ft_strcmp(&argv[i], ".ber") == 0)
-		return (0);
-	else
-		return (1);
-}
 
 t_game	*ft_init_strcut(char *argv, t_game *game)
 {

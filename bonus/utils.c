@@ -6,11 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:15:14 by marirodr          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/23 19:33:07 by marirodr         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/24 17:09:11 by marirodr         ###   ########.fr       */
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
+/*   Updated: 2023/05/25 16:48:03 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +28,9 @@ int	ft_check_arg(char *argv)
 		return (1);
 }
 
-<<<<<<< HEAD
-/*function that check if all collectibles have been taken, to know if you win
-the game (and exit the window).*/
-				//mlx_close_window(game->mlx);
-=======
 /*This function is used to verify that all the collectibles have been taken
 before being able to access the exit.*/
 //mlx_close_window(game->mlx);
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 
 int	ft_win(t_game *game, int y, int x)
 {
@@ -51,15 +41,10 @@ int	ft_win(t_game *game, int y, int x)
 			if (game->map[y][x] == 'E')
 			{
 				game->flag = 1;
-<<<<<<< HEAD
-				game->plyer_d->instances[0].enabled = 0;
-				game->plyer_a->instances[0].x = 100000;
-=======
 				game->plyer_d->instances[0].x = 100000;
 				game->plyer_a->instances[0].x = 100000;
 				game->plyer_w->instances[0].x = 100000;
 				game->plyer_s->instances[0].x = 100000;
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 				mlx_delete_image(game->mlx, game->exit_img);
 				ft_printf("YASS, 20 hours of sleep straight\n");
 				return (1);
@@ -71,13 +56,8 @@ int	ft_win(t_game *game, int y, int x)
 	return (0);
 }
 
-<<<<<<< HEAD
-/*esta funcion comprueba la posicion de los coleccionables y cuando una
-coincide con la del jugardor, desactiva esa instancia.*/
-=======
 /*This function checks the position of the collectibles, and when one matches
 the player's position, it deactivates that instance.*/
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 
 void	ft_eat_fish(t_game *game)
 {
@@ -98,15 +78,12 @@ void	ft_eat_fish(t_game *game)
 	}
 }
 
-<<<<<<< HEAD
-=======
 /*This function display the number of movements made by the player on the
 screen. Two things should be taken into account: firstly, the mlx_put_string
 function converts the string into an image to enable screen display. And
 lastly, the number of movements needs to be converted into characters before
 being displayed.*/
 
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 void	ft_score(t_game *game)
 {
 	char	*str;

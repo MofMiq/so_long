@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:05:48 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/22 16:40:20 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:54:07 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	ft_game_start(t_game *game)
 {
 	ft_create_window(game);
-	ft_generate_map(game);
+	ft_render_map(game);
 	ft_render_player(game);
 	mlx_key_hook(game->mlx, &ft_controls, game);
 	mlx_loop(game->mlx);
@@ -69,7 +69,7 @@ window.
 We also first place the floor image in all cells to ensure that the remaining
 sprites don't appear "hanging in the air" or without a base.*/
 
-void	ft_generate_map(t_game *game)
+void	ft_render_map(t_game *game)
 {
 	int	y;
 	int	x;

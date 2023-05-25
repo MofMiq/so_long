@@ -6,11 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/23 19:53:01 by marirodr         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/24 16:22:19 by marirodr         ###   ########.fr       */
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
+/*   Updated: 2023/05/25 17:10:03 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +51,8 @@ typedef struct s_game
 	mlx_image_t					*score;
 	mlx_image_t					*plyer_d;
 	mlx_image_t					*plyer_a;
-<<<<<<< HEAD
-=======
 	mlx_image_t					*plyer_w;
 	mlx_image_t					*plyer_s;
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	mlx_image_t					*floor_img;
 	mlx_image_t					*wall_img;
 	mlx_image_t					*coll_img;
@@ -72,11 +65,8 @@ typedef struct s_texture
 {
 	mlx_texture_t		*player;
 	mlx_texture_t		*player_a;
-<<<<<<< HEAD
-=======
 	mlx_texture_t		*player_w;
 	mlx_texture_t		*player_s;
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	mlx_texture_t		*floor;
 	mlx_texture_t		*wall;
 	mlx_texture_t		*collec;
@@ -84,7 +74,6 @@ typedef struct s_texture
 	mlx_texture_t		*enemy;
 	mlx_texture_t		*exit_cat;
 }	t_texture;
-
 
 //free_n_error.c
 void	ft_error(int error);
@@ -105,11 +94,7 @@ void	ft_valid_path(t_game *game);
 
 //game.c
 void	ft_create_window(t_game *game);
-<<<<<<< HEAD
-void	ft_generate_map(t_game *game);
-=======
 void	ft_render_map(t_game *game);
->>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 void	ft_render_player(t_game *game);
 void	ft_texture_to_image(t_game *game, t_texture *texture);
 void	ft_delete_texture(t_texture *texture);

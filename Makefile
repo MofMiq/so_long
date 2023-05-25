@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/04 16:03:19 by marirodr          #+#    #+#              #
-#    Updated: 2023/05/23 18:44:16 by marirodr         ###   ########.fr        #
+#    Updated: 2023/05/25 16:53:24 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,11 @@ RM			=	rm -rf
 
 all:	$(NAME)
 
-#no podemos llamar a (LIBFT) ni (MLX42) en (NAME) porque estaria buscando los .a
-#antes de crearlos y da error. Hacemos previamente las reglas para compilar tanto
-#libft como MLX42	y ya luego compilamos con flags y frameworks los .a de ambas 
-#librerias. 
+#We cannot call (LIBFT) or (MLX42) in (NAME) because it would be searching for the
+#.a files before creating them, resulting in a error. We first create the rules to
+#compile both libft and MLX42, and then we compile the .a files of both libraries
+#with the apropiate flags and frameworks.
+
 $(NAME): $(OBJ)
 					@make -s -C libft
 					@make -s -C MLX42
