@@ -6,7 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:18:23 by marirodr          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/23 19:17:30 by marirodr         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/24 17:24:56 by marirodr         ###   ########.fr       */
+>>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +33,20 @@ t_game	*ft_init_strcut(char *argv, t_game *game)
 	game->p_count = 0;
 	game->e_count = 0;
 	game->c_count = 0;
+<<<<<<< HEAD
 	game->c_total = 0;
+=======
+>>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	game->enemy_c = 0;
 	game->moves = 0;
 	game->mlx = NULL;
 	game->plyer_d = NULL;
 	game->plyer_a = NULL;
+<<<<<<< HEAD
+=======
+	game->plyer_w = NULL;
+	game->plyer_s = NULL;
+>>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	game->floor_img = NULL;
 	game->wall_img = NULL;
 	game->coll_img = NULL;
@@ -76,7 +88,11 @@ void	ft_validate_map(t_game *game)
 void	ft_game_start(t_game *game)
 {
 	ft_create_window(game);
+<<<<<<< HEAD
 	ft_generate_map(game);
+=======
+	ft_render_map(game);
+>>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	ft_render_player(game);
 	mlx_key_hook(game->mlx, &ft_controls, game);
 	mlx_loop(game->mlx);

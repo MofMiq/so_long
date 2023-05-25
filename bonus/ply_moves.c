@@ -6,7 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:33:58 by marirodr          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/23 19:50:52 by marirodr         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/24 17:18:30 by marirodr         ###   ########.fr       */
+>>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +63,23 @@ void	ft_up(t_game *game)
 {
 	if (game->map[game->curr_py - 1][game->curr_px] == '1'
 		|| (game->map[game->curr_py - 1][game->curr_px] == 'E'
+<<<<<<< HEAD
 			&& ft_win(game, game->curr_py - 1, game->curr_px)))
 		return ;
 	game->plyer_d->instances[0].y -= 32;
 	game->plyer_a->instances[0].y -= 32;
+=======
+			&& !ft_win(game, game->curr_py - 1, game->curr_px)))
+		return ;
+	game->plyer_d->instances[0].y -= 32;
+	game->plyer_a->instances[0].y -= 32;
+	game->plyer_w->instances[0].y -= 32;
+	game->plyer_s->instances[0].y -= 32;
+	game->plyer_d->instances[0].enabled = 0;
+	game->plyer_a->instances[0].enabled = 0;
+	game->plyer_w->instances[0].enabled = 1;
+	game->plyer_s->instances[0].enabled = 0;
+>>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	if (game->map[game->curr_py - 1][game->curr_px] == 'D')
 		ft_you_died(game);
 	if (game->map[game->curr_py - 1][game->curr_px] == 'C')
@@ -85,6 +102,15 @@ void	ft_down(t_game *game)
 		return ;
 	game->plyer_d->instances[0].y += 32;
 	game->plyer_a->instances[0].y += 32;
+<<<<<<< HEAD
+=======
+	game->plyer_w->instances[0].y += 32;
+	game->plyer_s->instances[0].y += 32;
+	game->plyer_d->instances[0].enabled = 0;
+	game->plyer_a->instances[0].enabled = 0;
+	game->plyer_w->instances[0].enabled = 0;
+	game->plyer_s->instances[0].enabled = 1;
+>>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	if (game->map[game->curr_py + 1][game->curr_px] == 'D')
 		ft_you_died(game);
 	if (game->map[game->curr_py + 1][game->curr_px] == 'C')
@@ -108,8 +134,17 @@ void	ft_left(t_game *game)
 		return ;
 	game->plyer_d->instances[0].x -= 32;
 	game->plyer_a->instances[0].x -= 32;
+<<<<<<< HEAD
 	game->plyer_d->instances[0].enabled = 0;
 	game->plyer_a->instances[0].enabled = 1;
+=======
+	game->plyer_w->instances[0].x -= 32;
+	game->plyer_s->instances[0].x -= 32;
+	game->plyer_d->instances[0].enabled = 0;
+	game->plyer_a->instances[0].enabled = 1;
+	game->plyer_w->instances[0].enabled = 0;
+	game->plyer_s->instances[0].enabled = 0;
+>>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	if (game->map[game->curr_py][game->curr_px - 1] == 'D')
 		ft_you_died(game);
 	if (game->map[game->curr_py][game->curr_px - 1] == 'C')
@@ -132,8 +167,17 @@ void	ft_right(t_game *game)
 		return ;
 	game->plyer_d->instances[0].x += 32;
 	game->plyer_a->instances[0].x += 32;
+<<<<<<< HEAD
 	game->plyer_d->instances[0].enabled = 1;
 	game->plyer_a->instances[0].enabled = 0;
+=======
+	game->plyer_w->instances[0].x += 32;
+	game->plyer_s->instances[0].x += 32;
+	game->plyer_d->instances[0].enabled = 1;
+	game->plyer_a->instances[0].enabled = 0;
+	game->plyer_w->instances[0].enabled = 0;
+	game->plyer_s->instances[0].enabled = 0;
+>>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 	if (game->map[game->curr_py][game->curr_px + 1] == 'D')
 		ft_you_died(game);
 	if (game->map[game->curr_py][game->curr_px + 1] == 'C')

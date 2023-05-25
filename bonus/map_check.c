@@ -6,7 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:31:21 by marirodr          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/23 19:10:03 by marirodr         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/24 16:18:58 by marirodr         ###   ########.fr       */
+>>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +105,11 @@ void	ft_check_elements(t_game *game)
 				game->e_count++;
 			else if (game->map[y][x] == 'C')
 				game->c_count++;
+<<<<<<< HEAD
 			else if (!ft_strchr("10D", game->map[y][x]))
+=======
+			else if (!ft_strchr("10D", game->map[y][x])) //strchr explain
+>>>>>>> 5f007d4eab39c40bf34e3b4fc76899b1cd2b3c40
 				ft_error(INVALID_ELEMENT);
 		}
 	}
