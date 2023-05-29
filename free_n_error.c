@@ -70,7 +70,7 @@ void	ft_free(t_game *game)
 	free(game);
 }
 
-//for debug only
+/*For debug only.*/
 void	ft_print_map(t_game *game)
 {
 	int	i;
