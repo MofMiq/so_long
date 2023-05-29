@@ -18,7 +18,7 @@ have one huge line with the entire map. Then, we apply ft_split to it, generatin
 a clean matrix within the structure (in reality, we create two matrices because
 we will later need a copy of the map when using ft_flood_fill).
 Additionally, we will perform two checks: first, if the file is empty, and then
-if the file starts with a '\n'*/
+if the file starts with a '\n'.*/
 
 void	ft_read_map(t_game *game, int fd)
 {
