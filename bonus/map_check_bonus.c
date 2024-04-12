@@ -6,11 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:31:21 by marirodr          #+#    #+#             */
-/*   Updated: 2024/04/08 11:19:17 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:06:06 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 /*We read the map using get_next_line and we go line by line, retrieving all the
 rows of the map. We concatenate them into another variable called tmp, so that we
@@ -78,7 +78,9 @@ void	ft_check_map(t_game *game)
 one collectible ('C'), exactly one player ('P'), and exactly one exit ('E').
 Additionally, we save the position of the player in the structure for later use.
 We also check whether there is an undefined element in the map, such as an 'X'.
-*/
+I use ft_strchr function, which returns 0 if it doesn't find a char in a string,
+to check that there are no undefined element in the map. I call this function
+because the 25 lines restriction.*/
 
 void	ft_check_elements(t_game *game)
 {
@@ -101,7 +103,7 @@ void	ft_check_elements(t_game *game)
 				game->e_count++;
 			else if (game->map[y][x] == 'C')
 				game->c_count++;
-			else if (game->map[y][x] != '0' && game->map[y][x] != '1')
+			else if (!ft_strchr("10D", game->map[y][x]))
 				ft_error(INVALID_ELEMENT);
 		}
 	}
@@ -123,7 +125,8 @@ void	ft_flood_fill(t_game *game, int p_y, int p_x)
 {
 	if (p_y < 0 || p_x < 0 || p_y > game->num_row
 		|| p_x > game->num_col || game->map_copy[p_y][p_x] == '1'
-			|| game->map_copy[p_y][p_x] == 'F')
+			|| game->map_copy[p_y][p_x] == 'F'
+				|| game->map_copy[p_y][p_x] == 'D')
 		return ;
 	if (game->map_copy[p_y][p_x] == 'E'
 			|| game->map_copy[p_y][p_x] == 'C')

@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/04 16:03:19 by marirodr          #+#    #+#              #
-#    Updated: 2023/05/25 16:53:24 by marirodr         ###   ########.fr        #
+#    Updated: 2024/04/08 11:29:52 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	so_long
 
 NAME_BONUS	=	so_long_bonus
 
-CC			=	gcc -g
+CC			=	gcc
 
 CFLAGS		=	-Wall -Wextra -Werror
 
@@ -25,12 +25,12 @@ MLX42		=	MLX42/libmlx42.a
 SRC			=	so_long.c free_n_error.c map_check.c game.c ply_moves.c \
 				utils.c \
 
-SRC_BONUS = 	bonus/so_long.c bonus/free_n_error.c bonus/map_check.c \
-				bonus/game.c bonus/ply_moves.c bonus/utils.c bonus/enemy.c \
+SRC_BONUS = 	bonus/so_long_bonus.c bonus/free_n_error_bonus.c bonus/map_check_bonus.c \
+				bonus/game_bonus.c bonus/ply_moves_bonus.c bonus/utils_bonus.c bonus/enemy_bonus.c \
 			  
-OBJ			=	$(SRC:.c=.o)
+OBJ			=	$(addprefix obj/, $(SRC:.c=.o))
 
-OBJ_BONUS	=	$(SRC_BONUS:.c=.o)
+OBJ_BONUS	=	$(addprefix obj/, $(SRC_BONUS:.c=.o))
 
 EXTRA		=	-framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw -L"/Users/marirodr/.brew/opt/glfw/lib/"
 
@@ -53,7 +53,8 @@ $(NAME): $(OBJ)
 					@$(CC) $(CFLAGS) $(OBJ) $(MLX42) $(LIBFT) $(EXTRA) -o $(NAME)
 					@echo "$(GREEN)So_long ready$(END)"
 				
-.c.o:
+obj/%.o: %.c
+					@mkdir -p $(dir $@)
 					@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: $(OBJ_BONUS)
@@ -63,7 +64,7 @@ bonus: $(OBJ_BONUS)
 					@echo "$(GREEN)So_long bonus ready$(END)"
 
 clean:
-				@$(RM) $(OBJ) $(OBJ_BONUS)
+				@$(RM) $(OBJ) $(OBJ_BONUS) obj/
 				@echo "$(RED)Compiled objects have been removed$(END)"
 
 fclean:	clean

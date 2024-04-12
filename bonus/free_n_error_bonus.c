@@ -6,11 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:00:21 by marirodr          #+#    #+#             */
-/*   Updated: 2024/04/08 10:51:27 by marirodr         ###   ########.fr       */
+/*   Updated: 2024/04/08 10:56:49 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 /*This function displays the different errors' messages that can be produced
 during the program's execution.*/
@@ -28,8 +28,8 @@ void	ft_error(int error)
 	else if (error == INVALID_MAP)
 		ft_printf("Error, the map is invalid\n");
 	else if (error == BAD_ROW)
-		ft_printf("Error, the number of columns aren't the \
-			same for each row\n");
+		ft_printf("Error, the number of columns aren't\
+			the same for each row\n");
 	else if (error == NO_WALLS)
 		ft_printf("Error, the map isn't fully surrounded of walls\n");
 	else if (error == INVALID_ELEMENT)

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/25 17:10:03 by marirodr         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:09:00 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-//S_P = sprite size
 # define S_SZ 32
 # define BAD_ARG 1
 # define EXTENSION_ERROR 2
@@ -47,6 +46,7 @@ typedef struct s_game
 	int							c_total;
 	int							enemy_c;
 	int							flag;
+	float						time;
 	mlx_t						*mlx;
 	mlx_image_t					*score;
 	mlx_image_t					*plyer_d;
@@ -58,6 +58,7 @@ typedef struct s_game
 	mlx_image_t					*coll_img;
 	mlx_image_t					*exit_img;
 	mlx_image_t					*enemy_img;
+	mlx_image_t					*enemy_right_img;
 	mlx_image_t					*exit_cat;
 }	t_game;
 
@@ -72,6 +73,7 @@ typedef struct s_texture
 	mlx_texture_t		*collec;
 	mlx_texture_t		*exit;
 	mlx_texture_t		*enemy;
+	mlx_texture_t		*enemy_right;
 	mlx_texture_t		*exit_cat;
 }	t_texture;
 
@@ -115,5 +117,8 @@ void	ft_score(t_game *game);
 //enemy.c
 void	ft_check_enemy(t_game *game);
 void	ft_you_died(t_game *game);
+void	ft_render_enemy(t_game *game, int y, int x, int *enemy);
+void	ft_enemy_left(t_game *game, int y, int x, int i);
+void	ft_enemy_right(t_game *game, int y, int x, int i);
 
 #endif

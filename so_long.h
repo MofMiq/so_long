@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:03:19 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/25 16:57:49 by marirodr         ###   ########.fr       */
+/*   Updated: 2024/04/08 11:32:49 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_texture
 
 //main.c
 t_game	*ft_init_strcut(char *argv, t_game *game);
-void	ft_map_check(t_game *game);
+void	ft_validate_map(t_game *game);
 
 //free_n_error.c
 void	ft_error(int error);

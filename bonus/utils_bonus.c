@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:15:14 by marirodr          #+#    #+#             */
-/*   Updated: 2024/04/08 10:51:50 by marirodr         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:37:32 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 /*We check if the file given as a parameter has the correct extension, which is 
 .ber.*/
@@ -28,8 +28,9 @@ int	ft_check_arg(char *argv)
 		return (1);
 }
 
-/*function that check if all collectibles have been taken, to know if you win
-the game (and exit the window).*/
+/*This function is used to verify that all the collectibles have been taken
+before being able to access the exit.*/
+//mlx_close_window(game->mlx);
 
 int	ft_win(t_game *game, int y, int x)
 {
@@ -39,7 +40,15 @@ int	ft_win(t_game *game, int y, int x)
 		{
 			if (game->map[y][x] == 'E')
 			{
-				mlx_close_window(game->mlx);
+				game->flag = 1;
+				game->plyer_d->instances[0].x = 100000;
+				game->plyer_a->instances[0].x = 100000;
+				game->plyer_w->instances[0].x = 100000;
+				game->plyer_s->instances[0].x = 100000;
+				mlx_delete_image(game->mlx, game->exit_img);
+				mlx_put_string(game->mlx, "YOU WIN",
+					((game->num_col / 2) * 32) - 48,
+					((game->num_row / 2) * 32));
 				ft_printf("YASS, 20 hours of sleep straight\n");
 				return (1);
 			}
@@ -58,15 +67,35 @@ void	ft_eat_fish(t_game *game)
 	int	i;
 
 	i = 0;
+	game->c_count--;
 	while (i < game->c_total)
 	{
-		if (game->coll_img->instances[i].x == game->plyer_img->instances[0].x
+		if (game->coll_img->instances[i].x == game->plyer_d->instances[0].x
 			&& game->coll_img->instances[i].y
-			== game->plyer_img->instances[0].y)
+			== game->plyer_d->instances[0].y)
 		{
 			ft_printf("Yummy!\n");
 			game->coll_img->instances[i].enabled = 0;
 		}
 		i++;
 	}
+}
+
+/*This function display the number of movements made by the player on the
+screen. Two things should be taken into account: firstly, the mlx_put_string
+function converts the string into an image to enable screen display. And
+lastly, the number of movements needs to be converted into characters before
+being displayed.*/
+
+void	ft_score(t_game *game)
+{
+	char	*str;
+	char	*str2;
+
+	str2 = ft_itoa(game->moves);
+	str = ft_strjoin("Moves: ", str2);
+	mlx_delete_image(game->mlx, game->score);
+	game->score = mlx_put_string(game->mlx, str, 10, 10);
+	free(str);
+	free(str2);
 }

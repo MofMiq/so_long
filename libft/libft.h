@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 10:33:34 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/12 17:00:28 by marirodr         ###   ########.fr       */
+/*   Updated: 2024/04/08 11:16:39 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void				ft_putstr(char *str);
 char				*ft_strcpy(char *dest, char *src);
 char				*ft_strrev(char *str);
 void				sort_int_tab(int *tab, unsigned int size);
+int					ft_matrix_len(char **matrix);
 
 //memory
 void				ft_bzero(void *s, size_t n);
