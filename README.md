@@ -15,7 +15,7 @@ In this project, we have to create a 2D game (top down or profile) where the pla
 • The game doesn’t need to be real-time.
 
 <div align="center">
-  <img src="https://github.com/MofMiq/so_long/blob/main/so_long.gif">
+  <img src="https://github.com/MofMiq/so_long/blob/main/gifs/so_long.gif">
 </div>
 
 ### Map
@@ -74,7 +74,7 @@ It is important to set up these callbacks before calling **`mlx_loop`**, because
 It is also important to know how to manage the window and the program when they are closed.  **`mlx_close_window`** notifies MLX42 that it should stop rendering and exit the main loop. **`mlx_terminate`** takes care of releasing of all our allocated resources.
 
 <div align="center">
-  <img src="https://github.com/MofMiq/so_long/blob/main/bonus_lose.gif">
+  <img src="https://github.com/MofMiq/so_long/blob/main/gifs/bonus_lose.gif">
 </div>
 
 ## Rendering images
@@ -111,8 +111,9 @@ The PNG images I used in my game are 32 x 32 pixels in size, so whenever we woul
 ## Bonus
 
 <div align="center">
-  <img src="https://github.com/MofMiq/so_long/blob/main/bonus_win.gif">
+  <img src="https://github.com/MofMiq/so_long/blob/main/gifs/bonus1.gif" width="600"/>
 </div>
+
 
 • Add an enemy that causes the player to die if they come into contact with it. \
 • Add some sprite animations. \
