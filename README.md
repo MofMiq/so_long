@@ -1,4 +1,5 @@
 # so_long
+> This repository contains a "So_long" project that is part of the École 42 curriculum.
 
 This is my first graphic project, and it consists of creating a simple 2D game. 
 
