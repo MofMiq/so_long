@@ -125,3 +125,5 @@ The bonus part of this project is not very difficult if you have done a solid jo
 To display text on the screen, you simply call the function **`mlx_put_string`**, which essentially draws a string on an image and then displays it on the screen. So, similar to images, it returns a pointer to the image that has been generated with the string.
 
 Regarding animations, just like we used instances for collectibles, we will do the same to provide basic movement animations for the player. Every time the player moves, we set the boolean 'enabled' to 1 (true) for the corresponding image instance based on the direction, and for the other three instances, we change the value of 'enabled' to 0 to deactivate them (example: game->player_d->instance[0].enabled = 1).
+
+Subject version: 2.3
